@@ -10,6 +10,9 @@ var DirectoriesPage = (function () {
     var $actionRenameBtn;   //重命名按钮
     var $actionDeleteBtn;   //删除按钮
     var $renameDialog;      //重命名文件夹
+    var $newFileBtn;        //新建文件按钮
+    var $chooseFiletypeSelect; //文件类型选择器
+    var $newFileDialog;     //文件名输入框
 
     function DirectoriesPage() {
         _this = this;
@@ -32,6 +35,9 @@ var DirectoriesPage = (function () {
         $actionRenameBtn = $fileActionsMenu.find("button.rename");
         $actionDeleteBtn = $fileActionsMenu.find("button.delete");
         $renameDialog = $("#rename-dialog");
+        $chooseFiletypeSelect = $("#choose-filetype-select");
+        $newFileBtn = $("#new-file-btn");
+        $newFileDialog = $("#new-file-dialog");
     };
 
     /**
@@ -48,22 +54,33 @@ var DirectoriesPage = (function () {
     DirectoriesPage.prototype.onBindEvent = function () {
         $itemActionBtn.unbind().click(function (event) {
             var $this = $(this);
-            $fileActionsMenuHeader.text($this.data('item_name'));
+            $fileActionsMenuHeader.html("<small class='text text-danger'>{0}</small>".format($this.data("item_name")));
             $fileActionsMenu.data("item_name", $this.data("item_name"));
             $fileActionsMenu.data("item_path", $this.data("item_path"));
             $fileActionsMenu.miOptionMenu('show');
         });
         $actionRenameBtn.click(function () {
-            $renameDialog.find(".dialog>.title").text("重命名{0}".format($fileActionsMenu.data("item_name")));
+            $renameDialog.find(".dialog>.title").html("重命名<small class='text text-danger'>{0}</small>".format(getCurrentFileName()));
             $renameDialog.miInputDialog('show');
         });
         $actionDeleteBtn.click(function () {
-            $.miConfirm("确定要删除{0}吗".format($fileActionsMenu.data("item_name")), function () {
-                $.miToast("确认删除文件！！！");
+            $.miConfirm("确定要删除<small class='text text-danger'>{0}</small>吗?".format(getCurrentFileName()), function () {
+                _this.actionFileDelete();
             });
         });
-        $renameDialog.bind('confirmed', function (data) {
-            $.miToast(data.input);
+        $renameDialog.bind('confirmed', function (event, data) {
+            _this.actionFileRename(data);
+        });
+        $newFileBtn.click(function () {
+            $chooseFiletypeSelect.miSelect('show');
+        });
+        $chooseFiletypeSelect.bind('confirmed', function (event, data) {
+            $newFileDialog.find(".title>span").hide();
+            $newFileDialog.find(".title>span.{0}".format(data.value)).show();
+            $newFileDialog.data('filetype', data.value).miInputDialog('show');
+        });
+        $newFileDialog.bind('confirmed', function (event, data) {
+            $.miToast("新建：" + $(this).data('filetype') + data);
         });
     };
 
@@ -74,27 +91,64 @@ var DirectoriesPage = (function () {
 
     };
 
-    ///**
-    // * 保存文件内容
-    // */
-    //DirectoriesPage.prototype.actionSaveModify = function () {
-    //    $.miLoading('show');
-    //    $.ajax({
-    //        url: "/directories/1?root_path={0}&extra_path={1}".format(_this.file_root_path, _this.file_extra_path),
-    //        method: 'put',
-    //        data: {content: $contentArea.val()},
-    //        success: function (data) {
-    //            $.miLoading('hide');
-    //            $.miToast("保存成功", function (data) {
-    //                window.location.reload();
-    //            });
-    //        }, error: function (data) {
-    //            $.miLoading('hide');
-    //            $.miToast("保存失败");
-    //        }
-    //
-    //    });
-    //};
+    /**
+     *  重命名文件
+     */
+    DirectoriesPage.prototype.actionFileRename = function (newFileName) {
+        $.miLoading('show');
+        $.ajax({
+            url: "/directories/rename",
+            method: 'put',
+            data: {
+                old_path: "{0}/{1}/{2}".format(_this.dir_root_path, _this.dir_extra_path, getCurrentFileName()),
+                new_path: "{0}/{1}/{2}".format(_this.dir_root_path, _this.dir_extra_path, newFileName),
+                utf8: "√",
+                authenticity_token: _this.getAuthenticityToken()
+            },
+            success: function (data) {
+                $.miLoading('hide');
+                $.miToast("重命名成功", function (data) {
+                    window.location.reload();
+                });
+            }, error: function (data) {
+                $.miLoading('hide');
+                $.miToast("重命名失败");
+            }
+
+        });
+    };
+    /**
+     *  删除文件
+     */
+    DirectoriesPage.prototype.actionFileDelete = function () {
+        $.miLoading('show');
+        $.ajax({
+            url: "/directories/1?path={0}/{1}/{3}&utf8=√&authenticity_token={2}".format(_this.dir_root_path,
+                _this.dir_extra_path,
+                _this.getAuthenticityToken(),
+                getCurrentFileName()
+            ),
+            method: 'delete',
+            success: function (data) {
+                $.miLoading('hide');
+                $.miToast("删除成功", function (data) {
+                    window.location.reload();
+                });
+            }, error: function (data) {
+                $.miLoading('hide');
+                $.miToast("删除失败");
+            }
+
+        });
+    };
+
+    /**
+     * 获取当前选择中的文件名字
+     * @returns {*}
+     */
+    function getCurrentFileName() {
+        return $fileActionsMenu.data("item_name");
+    }
 
     return DirectoriesPage;
 })();

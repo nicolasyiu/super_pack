@@ -4,6 +4,9 @@ h5(data-root_path=params[:root_path] data-extra_path=params[:extra_path])
 .panel.panel-default
   .panel-heading
     span 当前目录&nbsp;
+    button.btn.btn-success.btn-xs.pull-right#new-file-btn
+      span.glyphicon.glyphicon-plus
+      ="新建"
   table.table.table-hover
     - @directories.each do |item|
       tr
@@ -16,6 +19,36 @@ h5(data-root_path=params[:root_path] data-extra_path=params[:extra_path])
             a(href=directories_path+"?extra_path=#{params[:extra_path]}/#{item.name}")=item.name
 
           span.glyphicon.glyphicon-option-horizontal.pull-right.file-actions-btn(style="color:#ddd" data-item_path="#{params[:extra_path]}/#{item.name}" data-item_name=item.name)
+
+/选择文件类型的选择器
+.mi-select#choose-filetype-select
+  .select
+    .header
+      button.cancel 取消
+      small.text-gray 选择文件类型
+      button.confirm 确定
+    .body
+      ul
+        li(data-value='dir' data-extra='文件夹')
+          span.glyphicon.glyphicon-folder-open(style="color:#FFBF2E")
+          span &nbsp;&nbsp;文件夹
+          span.check
+        li(data-value='file' data-extra='文件')
+          span.glyphicon.glyphicon-list-alt(style="color:gray")
+          span &nbsp;&nbsp;文件
+          span.check.glyphicon.glyphicon-ok-circle
+
+/新建文件对话框
+.mi-input-dialog#new-file-dialog
+  .dialog
+    p.title
+      span.glyphicon.glyphicon-list-alt.file  文件
+      span.glyphicon.glyphicon-folder-open.dir  文件夹
+    .body
+      input(placeholder='请输入文件(夹)名称')
+    .footer
+      button.cancel 取消
+      button.confirm 确定
 
 /重命名文件夹对话框
 .mi-input-dialog#rename-dialog

@@ -69,9 +69,13 @@ var DirectoryPage = (function () {
     DirectoryPage.prototype.actionSaveModify = function () {
         $.miLoading('show');
         $.ajax({
-            url: "/directories/1?root_path={0}&extra_path={1}".format(_this.file_root_path,_this.file_extra_path),
+            url: "/directories/1?root_path={0}&extra_path={1}".format(_this.file_root_path, _this.file_extra_path),
             method: 'put',
-            data: {content: $contentArea.val()},
+            data: {
+                content: $contentArea.val(),
+                utf8: "√",
+                authenticity_token: _this.getAuthenticityToken()
+            },
             success: function (data) {
                 $.miLoading('hide');
                 $.miToast("保存成功", function (data) {

@@ -12,6 +12,9 @@ class DirectoriesController < ApplicationController
     @content = File.read(file_path)
   end
 
+  def new
+  end
+
   def edit
   end
 
@@ -23,6 +26,21 @@ class DirectoriesController < ApplicationController
     render json: {msg: 'ok'}
   end
 
-  def new
+  def rename
+    code = File.rename(params[:old_path], params[:new_path])
+    if code==0
+      render json: {msg: 'ok'}
+    else
+      render json: {msg: 'error'}, status: 400
+    end
+  end
+
+  def destroy
+    num = File.delete(params[:path])
+    if num>0
+      render json: {msg: 'ok'}
+    else
+      render json: {msg: 'error'}, status: 400
+    end
   end
 end

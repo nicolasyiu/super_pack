@@ -39,3 +39,11 @@ AppPage.prototype.onBindEvent = function () {
  */
 AppPage.prototype.onResume = function () {
 };
+
+/**
+ * 获取令牌token
+ */
+AppPage.prototype.getAuthenticityToken = function () {
+    var $appForm = $("#app_form");
+    return $appForm.find("input[name=authenticity_token]").val();
+};
