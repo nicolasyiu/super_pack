@@ -80,7 +80,7 @@ var DirectoriesPage = (function () {
             $newFileDialog.data('filetype', data.value).miInputDialog('show');
         });
         $newFileDialog.bind('confirmed', function (event, data) {
-            $.miToast("新建：" + $(this).data('filetype') + data);
+            _this.actionCreateDir(data, $(this).data('filetype'));
         });
     };
 
@@ -89,6 +89,35 @@ var DirectoriesPage = (function () {
      */
     DirectoriesPage.prototype.onResume = function () {
 
+    };
+
+    /**
+     * 创建文件/文件夹
+     * @param newFileName
+     * @param fileType
+     */
+    DirectoriesPage.prototype.actionCreateDir = function (newFileName, fileType) {
+        $.miLoading('show');
+        $.ajax({
+            url: "/directories",
+            method: 'post',
+            data: {
+                filetype: fileType,
+                path: "{0}/{1}/{2}".format(_this.dir_root_path, _this.dir_extra_path, newFileName),
+                utf8: "√",
+                authenticity_token: _this.getAuthenticityToken()
+            },
+            success: function (data) {
+                $.miLoading('hide');
+                $.miToast("创建成功", function (data) {
+                    window.location.reload();
+                });
+            }, error: function (data) {
+                $.miLoading('hide');
+                $.miToast("创建失败");
+            }
+
+        });
     };
 
     /**
