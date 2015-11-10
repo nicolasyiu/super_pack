@@ -1,0 +1,452 @@
+/*
+ *= require_self
+ *= require ./styles/main
+ */
+body {
+  background-color: #fff;
+  overflow-x: hidden;
+}
+
+$marginNormal: 8px;
+.home-list {
+  margin: $marginNormal $marginNormal $marginNormal;
+}
+
+body {
+  background-color: #F9F9F9;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 0px;
+  margin: 0px auto 0px auto;
+}
+
+.balance-header {
+  margin-right: 0px;
+  margin-left: 0px;
+  -webkit-margin-before: 0px;
+  -webkit-margin-after: 0px;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+  -webkit-padding-start: 0px;
+}
+
+.balance-header > div {
+  text-align: center;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-bottom: 5px solid rgba(0, 0, 0, 0.1);
+}
+
+.balance-header > div:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.balance-header > div.active {
+  border-bottom: 5px solid #326BDF;
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.balance-title {
+  font-size: 12pt;
+  color: #333333;
+}
+
+.balance-money {
+  height: 40px;
+  font-size: 15pt;
+  font-weight: bold;
+  /*color: #44B549;*/
+}
+
+.balance-date {
+  font-size: 8pt;
+  font-weight: normal;
+  color: #999999;
+  margin-top: 0px;
+}
+
+.balances > li {
+  padding-bottom: 20px;
+}
+
+.balances {
+  width: 100%;
+  margin-right: 0px;
+  margin-left: 0px;
+  -webkit-margin-before: 0px;
+  -webkit-margin-after: 0px;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+  -webkit-padding-start: 0px;
+  border-radius: 0px;
+}
+
+.balances > li:first-child {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+.balances > li:last-child {
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.balances-page {
+  margin-top: 5px;
+  margin-left: 8px;
+  margin-bottom: 15px;
+}
+
+.balance-info {
+  margin: 8px;
+}
+
+.order-info {
+  margin: 8px;
+}
+
+.order-info tr:first-child > td {
+  border-top: 0px;
+}
+
+.clearings > li {
+  padding-bottom: 8px;
+}
+
+.clearings {
+  margin-right: 10px;
+  margin-left: 10px;
+  -webkit-margin-before: 10px;
+  -webkit-margin-after: 10px;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 10px;
+  -webkit-padding-start: 10px;
+  border-radius: 5px;
+}
+
+.clearings :hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.clearings > li:first-child {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.clearings > li:last-child {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.products li {
+  margin-top: 8px;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.products > li:first-child {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+.products > li:last-child {
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.product-thumb {
+  width: 90px;
+  height: 90px;
+}
+
+.product-title {
+  font-size: 10pt;
+  line-height: 18px;
+  max-height: 54px;
+  overflow: hidden;
+}
+
+.product-price {
+  color: #F86212;
+  font-size: 14pt;
+}
+
+.distribute-price {
+  color: #44D04F;
+  font-size: 14pt;
+}
+
+.wap-login {
+  text-align: center;
+  margin-top: 40px;
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+.wap-login-logo {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 5px;
+}
+
+.wap-login-phone {
+  border-top: 1px solid #C0C0C0;
+  border-left: 1px solid #C0C0C0;
+  border-right: 1px solid #C0C0C0;
+  border-bottom: 1px solid #C0C0C0;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  -o-box-shadow: none;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  -webkit-appearance: none;
+  height: 44px;
+  font-size: 16px;
+  width: 100%;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-right: 0px;
+}
+
+.wap-login-passwd {
+  border-top: 0px;
+  border-left: 1px solid #C0C0C0;
+  border-right: 1px solid #C0C0C0;
+  border-bottom: 1px solid #C0C0C0;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  height: 44px;
+  width: 100%;
+  font-size: 16px;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-right: 0px;
+}
+
+.wap-login-button {
+  margin-top: 20px;
+  height: 42px;
+  font-size: 16px;
+  background-color: #326BDF;
+}
+
+.wap-login-brand {
+  margin-bottom: 15px;
+  font-size: 14pt;
+  color: #999;
+}
+
+.unbalanced-help {
+  font-size: 6pt;
+  font-weight: normal;
+}
+
+.balances-empty {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.balances-empty > img {
+  opacity: 0.2;
+}
+
+.balances-empty > div {
+  line-height: 25px;
+  margin-top: 10px;
+}
+
+.right-arrow {
+  width: 6px;
+  height: 10px;
+  opacity: 0.8;
+  margin-bottom: 2px
+}
+
+.mask {
+  background-color: transparent;
+}
+
+.mask:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.mask-round {
+
+}
+
+.mask-round:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -o-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+.shop-grid {
+  padding: 12px 0px 0px 0px;
+  height: 80px
+}
+
+.shop-grid-div {
+  padding: 12px 8px;
+}
+
+.hr-bottom {
+  margin-bottom: 5px;
+}
+
+.hr-top {
+  margin-top: 5px;
+}
+
+.shop-overview {
+  margin: 15px 8px 8px 8px;
+}
+
+.list-block {
+  margin: 15px 8px 8px 8px;
+}
+
+.shop-card {
+  margin: 8px 0px 8px 0px;
+
+}
+
+//已卖光
+.img-product-sale-out {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+//供货价（文字）
+.line-franchise {
+  margin-top: 5px;
+}
+
+//店铺首页，文字连接
+.help_links {
+  margin: 15px 10px;
+  text-align: center;
+  > a {
+    font-size: 10pt;
+  }
+  .circle-help {
+    background-color: #F67E19;
+    border-radius: 50%;
+    width: 80px;
+    display: inline-block;
+    padding-top: 20px;
+    margin-top: 8px;
+    font-size: 20pt;
+    height: 80px;
+    color: white
+  }
+}
+
+.shouquplus {
+  position: fixed;
+  bottom: 10px;
+  left: 8px;
+  p.word {
+    color: white;
+    position: absolute;
+    left: 13px;
+    top: 18px;
+  }
+}
+
+.taoplus .tpbtn.on {
+  background-position: 1px -197px;
+}
+
+.taoplus .tpbtn {
+  position: relative;
+  width: 54px;
+  height: 54px;
+  background: url(//img.tanliani.com/public/assets/sprite1.png) no-repeat;
+  -webkit-background-size: 195px 274px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.taoplus .tpbtn .icontao {
+  background-position: -107px -200px;
+}
+
+.taoplus .tpbtn ul li {
+  width: 40px;
+  height: 40px;
+  float: left;
+  overflow: hidden;
+}
+
+//完善个人资料
+.wap-to-complete {
+  text-align: center;
+  margin-top: 25px;
+  margin-left: 25px;
+  margin-right: 25px;
+
+  .wap-to-complete-button {
+    margin-top: 20px;
+    height: 42px;
+    font-size: 16px;
+    background-color: #326BDF;
+  }
+
+  .to-complete-logo {
+    width: 65px;
+    height: 65px;
+    margin-bottom: 5px;
+  }
+
+  .to-complete-brand {
+    margin-bottom: 12px;
+    font-size: 14pt;
+    color: #999;
+  }
+
+  div.input-group {
+    margin: 8px 0;
+    >input{
+      -webkit-appearance: none;
+    }
+  }
+}
+
+div.btn-get-sms-code {
+  background: #2B60DB;
+  color: white;
+}
+
+//产品分类
+.mobile-product-tags {
+  margin: 8px;
+}
+
+.mobile-product-tags div {
+  text-align: center;
+  padding: 5px 0;
+}
+
+.mobile-product-tags div > a {
+  border: solid 1px #aaa;
+  border-radius: 3px;
+  padding: 3px 5px;
+  color: #3d84b5;
+  background: #ffffff;
+  font-size: medium;
+}
+
+.mobile-product-tags div > a:hover {
+  border: solid 1px #ddd;
+  border-radius: 3px;
+  text-decoration: none;
+}
+
+.mobile-product-tags div > a.disabled {
+  background: #dcdcdc;
+  color: rgba(61, 132, 181, 0.8);
+}

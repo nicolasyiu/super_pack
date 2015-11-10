@@ -1,0 +1,156 @@
+@keyframes loading_point {
+  0% {
+    background-color: $color-loading-point-white;
+  }
+
+  33.3% {
+    background-color: $color-loading-point-gray;
+  }
+
+  66.6% {
+    background-color: $color-loading-point-grayer;
+  }
+
+  100% {
+    background-color: $color-loading-point-white;
+  }
+}
+
+@-webkit-keyframes loading_point {
+  0% {
+    background-color: $color-loading-point-white;
+  }
+
+  33.3% {
+    background-color: $color-loading-point-gray;
+  }
+
+  66.6% {
+    background-color: $color-loading-point-grayer;
+  }
+
+  100% {
+    background-color: $color-loading-point-white;
+  }
+}
+
+@keyframes loading_point_two {
+  0% {
+    background-color: $color-loading-point-grayer;
+  }
+
+  33.3% {
+    background-color: $color-loading-point-white;
+  }
+
+  66.6% {
+    background-color: $color-loading-point-gray;
+  }
+
+  100% {
+    background-color: $color-loading-point-grayer;
+  }
+}
+
+@-webkit-keyframes loading_point_two {
+  0% {
+    background-color: $color-loading-point-grayer;
+  }
+
+  33.3% {
+    background-color: $color-loading-point-white;
+  }
+
+  66.6% {
+    background-color: $color-loading-point-gray;
+  }
+
+  100% {
+    background-color: $color-loading-point-grayer;
+  }
+}
+
+@keyframes loading_point_three {
+  0% {
+    background-color: $color-loading-point-gray;
+  }
+
+  33.3% {
+    background-color: $color-loading-point-grayer;
+  }
+
+  66.6% {
+    background-color: $color-loading-point-white;
+  }
+
+  100% {
+    background-color: $color-loading-point-gray;
+  }
+}
+
+@-webkit-keyframes loading_point_three {
+  0% {
+    background-color: $color-loading-point-gray;
+  }
+
+  33.3% {
+    background-color: $color-loading-point-grayer;
+  }
+
+  66.6% {
+    background-color: $color-loading-point-white;
+  }
+
+  100% {
+    background-color: $color-loading-point-gray;
+  }
+}
+
+
+.mi-loading {
+  width: 120px;
+  height: 120px;
+  background: rgba(0, 0, 0, 0.6);
+  display: none;
+  position: fixed;
+  z-index: $z-index-loading;
+  color: white;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 5px;
+  padding: 12px;
+  @include float-middle-center;
+  .icon > img {
+    width: 35px;
+    margin: 8px;
+  }
+  p.label {
+    font-size: 12pt;
+    font-weight: normal;
+  }
+  .points {
+    margin-top: 5px;
+    text-align: center;
+    > i {
+      display: inline-table;
+      width: 5px;
+      height: 5px;
+      margin: 2px;
+      background: white;
+      border-radius: 100%;
+      animation: loading_point;
+      -webkit-animation: loading_point;
+      @include mix_loading_point;
+      &.two {
+        animation: loading_point_two;
+        -webkit-animation: loading_point_two;
+        @include mix_loading_point;
+      }
+      &.three {
+        animation: loading_point_three;
+        -webkit-animation: loading_point_three;
+        @include mix_loading_point;
+      }
+    }
+  }
+}

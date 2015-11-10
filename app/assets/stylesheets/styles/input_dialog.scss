@@ -1,0 +1,86 @@
+.mi-input-dialog {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: $z-index-input-dialog;
+  background: rgba(0, 0, 0, 0.4);
+  height: 100%;
+  .dialog {
+    background: white;
+    border-radius: 5px;
+    width: 90%;
+    max-width: 280px;
+    min-height: 150px;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    > .title {
+      padding: 8px 15px;
+      font-weight: bold;
+      margin: 8px 0 0 0;
+      font-size: 13pt;
+    }
+
+    > .body {
+      padding: 8px 15px 20px 15px;
+      margin-bottom: $num-button-height;
+      input {
+        margin-bottom: 8px;
+        width: 100%;
+        height: 38px;
+        border: 1px solid $color-line;
+        border-radius: 0;
+        padding: 3px 8px;
+        outline: none;
+        -webkit-appearance: none;
+        &:focus {
+          border-color: $blue;
+        }
+      }
+      textarea {
+        @extend input;
+        height: 70px;
+      }
+    }
+
+    > .footer {
+      position: absolute;
+      bottom: 0;
+      height: $num-button-height;
+      border-top: 1px solid $border-color;
+      width: 100%;
+      &:before, &:after {
+        clear: both;
+      }
+      > button {
+        -webkit-appearance: none;
+        background: white;
+        border: none;
+        text-align: center;
+        vertical-align: middle;
+        box-shadow: none;
+        outline: none;
+        display: block;
+        float: left;
+        width: 50%;
+        height: 100%;
+        &:hover {
+          background: $hover;
+        }
+        &.cancel {
+          border-radius: 0 0 0 5px;
+        }
+
+        &.confirm {
+          color: $color-text-orange;
+          border-left: 1px solid $border-color;
+          border-radius: 0 0 5px 0;
+        }
+      }
+    }
+  }
+}

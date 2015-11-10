@@ -1,0 +1,128 @@
+//导航栏
+header.mi-header {
+  border-color: $border-blue-color;
+  background-color: $blue;
+  color: #fff;
+  z-index: $z-index-header;
+  position: fixed;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 45px;
+  line-height: $num-header-height;
+  border-bottom: 1px solid $border-blue-color;
+  font-size: 12pt;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: center;
+  h2 {
+    display: inline-block;
+    line-height: $num-header-height;
+    font-size: 12pt;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: center;
+    font-weight: bolder;
+    padding: 0;
+    margin: 0 60px;
+    cursor: pointer;
+    label.badge {
+      background: white;
+      color: $color-text-orange;
+    }
+    span.glyphicon-chevron-down, span.glyphicon-chevron-up {
+      font-size: 14px;
+      font-weight: lighter;
+    }
+  }
+}
+
+//红色导航栏
+header.mi-header.red{
+  border-color: red;
+  background-color: red;
+}
+
+header.mi-header > .left {
+  display: inline-block;
+  position: absolute;
+  left: 8px;
+  top: 0;
+  height: $num-header-height;
+  cursor: pointer;
+  &:hover {
+    color: $color-white-press;
+  }
+  > span.glyphicon-option-vertical, > span.glyphicon-menu-left {
+    width: 10px;
+  }
+  > img.circle {
+    width: 32px;
+    height: 32px;
+    border: 1px solid white;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+  }
+}
+
+header.mi-header > .right {
+  display: inline-block;
+  position: absolute;
+  right: 8px;
+  top: 0;
+  height: $num-header-height;
+  vertical-align: middle;
+  cursor: pointer;
+  &:hover {
+    color: $color-white-press;
+  }
+  > img.circle {
+    width: 32px;
+    height: 32px;
+    border: 1px solid white;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+  }
+}
+
+//顶部选项卡
+header.mi-header > .tab {
+  border-radius: 4px;
+  border: 1px solid white;
+  color: white;
+  width: 50%;
+  max-width: 200px;
+  position: absolute;
+  height: $num-header-height - 15;
+  left: 50%;
+  top: 50%;
+  text-align: center;
+  vertical-align: middle;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+
+  &:before, &:after {
+    clear: both;
+  }
+
+  > .item {
+    margin: 0;
+    cursor: pointer;
+    text-align: center;
+    vertical-align: middle;
+    line-height: $num-header-height - 21;
+    display: block;
+    float: left;
+    width: 50%;
+    padding: 2px 5px;
+    &:active {
+      background: white;
+      color: $blue;
+    }
+    &.active {
+      background: white;
+      color: $blue;
+    }
+  }
+}

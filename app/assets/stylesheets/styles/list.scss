@@ -1,0 +1,132 @@
+.mi-list-block {
+  border-top: 1px solid $color-line;
+  border-bottom: 1px solid $color-line;
+  background-color: white;
+  padding: 0;
+  margin: 8px 0;
+  ul {
+    padding: 0 0 0 12px;
+    margin: 0;
+    list-style: none;
+    li {
+      .title {
+        margin-bottom: 5px;
+      }
+      padding: 10px 0;
+      position: relative;
+      border-bottom: 1px solid $color-line;
+      //右箭头
+      span.glyphicon-menu-right {
+        position: absolute;
+        top: 50%;
+        right: 8px;
+        color: #acacac;
+        transform: translate(0, -50%);
+        -webkit-transform: translate(0, -50%);
+      }
+      .right {
+        display: inline-block;
+        position: absolute;
+        top: 50%;
+        right: 30px;
+        transform: translate(0, -50%);
+        -webkit-transform: translate(0, -50%);
+      }
+      //被选中
+      &:hover {
+        background: $hover;
+      }
+      img.img-rounded {
+        width: 70px;
+        height: 70px;
+      }
+      .pull-right {
+        margin-right: 8px;
+      }
+    }
+    li.right-padding{
+      padding-right: 15px;
+    }
+
+    li:last-child {
+      border-bottom: none;
+    }
+
+    li > .lines {
+      margin-left: 5px;
+      display: inline-block;
+      vertical-align: middle;
+      p {
+        margin: 0;
+      }
+    }
+  }
+}
+
+.mi-list-block ul > li {
+  h5 {
+    margin: 5px 0;
+  }
+  .left-avatar {
+    width: 70px;
+    height: 70px;
+  }
+  .right-content {
+    position: absolute;
+    left: 75px;
+    top: 10px;
+    right: 12px;
+    .one-line {
+      text-overflow: ellipsis;
+      max-lines: 1;
+      white-space: nowrap;
+      word-break: break-all;
+
+    }
+  }
+}
+
+.mi-list-block ul > li.news {
+  h5 {
+    margin: 5px 0;
+  }
+  display: table;
+  width: 100%;
+  > .left-avatar {
+    display: table-cell;
+    width: 55px;
+    height: 55px;
+    border-radius: 5px;
+  }
+  > .right-content {
+    position: inherit;
+    display: table-cell;
+    vertical-align: top;
+    width: 100%;
+    left: 0;
+    top: auto;
+    right: auto;
+    padding-left: 8px;
+    padding-right: 8px;
+    p {
+      margin-bottom: 8px;
+    }
+    img.photo {
+      width: 75px;
+      height: 75px;
+    }
+    label.large-word {
+      font-size: 25px;
+      margin-left: 8px;
+      color: $color-text-orange;
+    }
+  }
+}
+
+.mi-list-block.no-hover {
+  > ul {
+    > li:hover {
+      background: transparent;
+    }
+  }
+}

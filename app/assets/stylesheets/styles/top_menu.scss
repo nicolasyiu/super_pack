@@ -1,0 +1,29 @@
+.mi-top-menu {
+  display: none;
+  position: fixed;
+  top: $num-header-height;
+  left: 0;
+  right: 0;
+  z-index: $z-index-top-menu;
+  background: rgba(0, 0, 0, 0.4);
+  height: 100%;
+  ul {
+    display: none;
+    width: 100%;
+    list-style: none;
+    background: white;
+    padding: 0;
+    li {
+      vertical-align: middle;
+      padding: 12px;
+      border-bottom: 1px solid $color-line;
+      &:last-child {
+        border-bottom: none;
+      }
+      > span.check {
+        float: right;
+        color: $blue;
+      }
+    }
+  }
+}

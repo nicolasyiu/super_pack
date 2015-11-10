@@ -1,0 +1,46 @@
+.digg_pagination {
+  margin-bottom: 25px;
+  border-bottom: 1px solid $color-line;
+  text-align: center;
+  &:before, &:after {
+    clear: both;
+  }
+  color: $color-text-orange;
+  background: white;
+  height: $num-header-height;
+  em {
+    display: none;
+  }
+  a {
+    display: none;
+    text-decoration: none;
+  }
+  > .previous_page {
+
+    padding-top: 12px;
+    color: $color-text-orange;
+    border-right: 1px solid $color-line;
+    &.disabled {
+      color: $color-text-gray;
+    }
+
+    display: block;
+    float: left;
+    width: 50%;
+    height: 100%;
+  }
+  > .next_page {
+    padding-top: 12px;
+    color: $color-text-orange;
+    &.disabled {
+      color: $color-text-gray;
+    }
+    display: block;
+    float: left;
+    width: 50%;
+    height: 100%;
+  }
+  > span.gap {
+    display: none;
+  }
+}

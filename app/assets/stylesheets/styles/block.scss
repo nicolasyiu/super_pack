@@ -1,0 +1,84 @@
+.mi-block-title {
+  padding-left: 3px;
+  border-left: 4px solid #6B6B6B;
+  font-size: 14px;
+  height: 14px;
+  margin-left: 8px;
+  line-height: 14px;
+  font-weight: normal;
+  &.red {
+    border-color: red;
+  }
+  &.margin{
+    margin-top: 12px;
+    margin-bottom: 12px;
+  }
+  &.margin-top{
+    margin-top: 12px;
+  }
+}
+
+.mi-block {
+  border-bottom: 1px solid $color-line;
+  text-align: center;
+  padding: 12px 0;
+  background: white;
+  &.tab {
+    &:before, &:after {
+      clear: both;
+    }
+    min-height: 64px;
+    padding: 0 0;
+    &.min {
+      min-height: 38px;
+    }
+  }
+  h2 {
+    margin-top: 12px;
+    margin-bottom: 5px;
+  }
+  > .item {
+    display: block;
+    float: left;
+    width: 50%;
+    padding: 2px 0 8px;
+    h4 {
+      margin-top: 8px;
+      margin-bottom: 5px;
+    }
+    &:hover {
+      background: $hover;
+    }
+    &.no-hover{
+      &:hover {
+        background: transparent;
+      }
+    }
+    &.right-border{
+      border-right: $color-line solid 1px;
+    }
+    &.i-3-1 {
+      width: 33.333333%;
+      position: relative;
+      > i.circle-point {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        width: 10px;
+        height: 10px;
+        border-radius: 100%;
+        background: red;
+      }
+    }
+    &.i-2-1 {
+      width: 50%;
+    }
+    &.i-4-1 {
+      width: 25%;
+    }
+  }
+  > .item.active {
+    color: $color-text-orange;
+    background-color: $hover;
+  }
+}

@@ -1,0 +1,60 @@
+.lattice {
+  border-top: 1px solid $color-line;
+  border-bottom: 1px solid $color-line;
+  background: white;
+  margin: 12px 0;
+  > .row {
+    min-height: 80px;
+    border-bottom: 1px solid $color-line;
+    width: 100%;
+    margin: 0;
+    &:before, &:after {
+      clear: both;
+    }
+    &.min {
+      min-height: 45px;
+    }
+    &:last-child {
+      border-bottom: none;
+    }
+
+    > .item {
+      display: block;
+      float: left;
+      min-height: 80px;
+      text-align: center;
+      padding-top: 12px;
+      width: 33.333333%;
+      &:hover {
+        background: $hover;
+      }
+      border-right: 1px solid $color-line;
+      &:last-child {
+        border-right: none;
+      }
+
+      > .icon {
+        font-size: 25px;
+        color: $color-text-orange;
+      }
+      > .title {
+        margin-top: 5px;
+        color: #A6A6AE;
+      }
+
+      &.i-3-1 {
+        width: 33.333333%;
+      }
+      &.i-2-1 {
+        width: 50%;
+      }
+    }
+
+    > .item.min {
+      min-height: 45px;
+      &.active {
+        color: $color-text-orange;
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+.mi-toast {
+  min-width: 80px;
+  max-width: 250px;
+  background: rgba(0, 0, 0, 0.6);
+  display: none;
+  position: fixed;
+  z-index: $z-index-toast;
+  color: white;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 4px;
+  padding: 12px;
+  @include float-middle-center;
+}

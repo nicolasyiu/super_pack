@@ -1,0 +1,71 @@
+.mi-select {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: $z-index-select;
+  background: rgba(0, 0, 0, 0.4);
+  height: 100%;
+  .select {
+    position: absolute;
+    bottom: 0;
+    background: white;
+    display: none;
+    width: 100%;
+    border-top: 1px solid $color-line;
+    .header {
+      position: relative;
+      text-align: center;
+      height: $num-button-height;
+      line-height: $num-button-height;
+      vertical-align: middle;
+      button {
+        height: $num-button-height;
+        -webkit-appearance: none;
+        outline: none;
+        min-width: 60px;
+        background: transparent;
+        font-size: 12pt;
+        font-weight: bold;
+        border: none;
+        &:active, &:hover {
+          background: $hover;
+        }
+      }
+      button.cancel{
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+      button.confirm {
+        position: absolute;
+        right: 0;
+        top: 0;
+        color: $color-text-orange;
+      }
+    }
+    .body {
+      width: 100%;
+      border-top: 1px solid $color-line;
+      padding-left: 12px;
+    }
+  }
+  ul {
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    li {
+      vertical-align: middle;
+      padding: 12px 12px 12px 8px;
+      border-top: 1px solid $color-line;
+      &:first-child {
+        border-top: none;
+      }
+      > span.check {
+        float: right;
+        color: $blue;
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+.mi-badge {
+  padding: 3px 8px;
+  color: white;
+  font-size: 8pt;
+  border-radius: 8px;
+  &.success {
+    background: $color-btn-success;
+  }
+  &.danger{
+    background: red;
+  }
+  &.warning{
+    background: $color-text-orange;
+  }
+}

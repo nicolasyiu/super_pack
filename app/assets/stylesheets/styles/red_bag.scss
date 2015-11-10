@@ -1,0 +1,85 @@
+.mi-red-bag {
+  background: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: $z-index-red-bag;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  display: none;
+}
+
+.mi-red-bag > .body {
+  margin-top: 65px;
+  width: 250px;
+  position: relative;
+  display: inline-block;
+}
+
+.mi-red-bag > .body > img.bag-close {
+  position: absolute;
+  top: 0;
+  width: 22px;
+  right: 0;
+}
+
+.mi-red-bag > .body > img.bag-top {
+  width: 250px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  clip: rect(0, 250px, 100px, 0);
+}
+
+.mi-red-bag > .body > div.bag-center {
+  width: 250px;
+  position: absolute;
+  top: 100px;
+  left: 0;
+  height: 240px;
+  border-radius: 0 0 5px 5px;
+  background-color: #C92126;
+  text-align: center;
+  > img.avatar {
+    width: 55px;
+    height: 55px;
+    margin-top: 12px;
+    border-radius: 100%;
+    border: 2px solid white;
+  }
+  > .title {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: white;
+    font-size: 11pt;
+    font-weight: lighter;
+  }
+  > .sub-title {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 8pt;
+    font-weight: lighter;
+  }
+  > .text-orange {
+    color: #FBE539;
+    margin: 15px 0;
+  }
+  > .select {
+    display: inline-block;
+    background: rgba(255,255,255,0.8);
+    color: #C92126;
+    width: 80%;
+    border-color: transparent;
+  }
+  > button.confirm {
+    background: #FBE539;
+    color: #C92126;
+    border: none;
+    -webkit-appearance: none;
+    box-shadow: none;
+    width: 90%;
+    &:hover {
+      background: #bfae2c;
+    }
+  }
+}

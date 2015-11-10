@@ -1,0 +1,12 @@
+.activity-list {
+  margin-top: 12px;
+  > .item {
+    padding: 0 0 12px 0;
+    text-align: center;
+    .banner {
+      max-width: 300px;
+      width: 300px;
+      border-radius: 8px;
+    }
+  }
+}

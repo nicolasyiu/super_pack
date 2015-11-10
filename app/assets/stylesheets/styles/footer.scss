@@ -1,0 +1,105 @@
+//底部tab栏
+footer.mi-footer-tab {
+  border-top: 1px solid #ddd;
+  height: $num-footer-tabs-height;
+  background: #222;
+  z-index: $z-index-footer;
+  color: #acacac;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  right: 0;
+  padding-top: 8px;
+  &:before, &:after {
+    clear: both;
+  }
+
+  //tab选项
+  > a.mi-item {
+    text-align: center;
+    top: 0;
+    width: 20%;
+    height: $num-footer-tabs-height - 9px;
+    vertical-align: middle;
+    position: relative;
+    padding: 0;
+    display: block;
+    float: left;
+    color: #acacac;
+    text-decoration: none;
+    > .glyphicon {
+      display: block;
+      font-size: 12px;
+    }
+    line-height: 35px;
+    > i.circle-point {
+      width: 10px;
+      height: 10px;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(100%,0);
+      -webkit-transform: translate(100%,0);
+      border-radius: 100%;
+      background: $color-text-orange;
+    }
+  }
+
+  //首页中间按钮
+  > .home {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    width: 70px;
+    height: 70px;
+    margin-top: -5px;
+    background-color: #222;
+    border-radius: 50%;
+    border: 2px solid white;
+    color: #acacac;
+    vertical-align: middle;
+    text-decoration: none;
+    > .glyphicon {
+      position: absolute;
+      display: inline-block;
+      font-size: 25px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      -webkit-transform: translate(-50%, -50%);
+    }
+  }
+
+  > a.active {
+    color: $color-text-orange;
+  }
+}
+
+//底部
+footer.mi-footer {
+  border-top: 1px solid $border-color;
+  position: fixed;
+  z-index: $z-index-footer;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  padding: 8px 5px;
+  height: $num-header-height+10px;
+  vertical-align: middle;
+  background: white;
+  &:before, &:after {
+    clear: both;
+  }
+  > button {
+    display: block;
+    float: left;
+    width: 45%;
+    @include mix_button;
+    height: $num-button-normal-height;
+    margin: 2px 2.5%;
+  }
+}

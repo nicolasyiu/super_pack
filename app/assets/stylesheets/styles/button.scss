@@ -1,0 +1,89 @@
+.mi-btn {
+  @include mix_button;
+  &:hover {
+    background: $border-blue-color;
+  }
+  height: $num-button-normal-height;
+}
+
+.mi-btn-large {
+  width: 90%;
+  max-width: 300px;
+  height: $num-button-height;
+}
+
+.mi-btn-small {
+  min-width: 60px;
+  font-size: 8pt;
+  line-height: 8pt;
+  height: $num-button-small-height;
+}
+
+.mi-border-btn-danger {
+  background: white;
+  color: $color-text-danger;
+  border: 1px solid $color-text-danger;
+  &:hover {
+    color: $color-text-danger-press;
+    border: 1px solid $color-text-danger-press;
+    background: $hover;
+  }
+  &.disabled{
+    color: $color-line;
+    border: 1px solid $color-line;
+    &:hover, &:active{
+      color: $color-line;
+      border: 1px solid $color-line;
+      background: white;
+    }
+  }
+}
+
+.mi-border-btn-success {
+  background: white;
+  color: $color-btn-success;
+  border: 1px solid $color-btn-success;
+  &:hover, &:active {
+    color: $color-btn-success-press;
+    border: 1px solid $color-btn-success-press;
+    background: $hover;
+  }
+  &.disabled{
+    color: $color-line;
+    border: 1px solid $color-line;
+    &:hover, &:active{
+      color: $color-line;
+      border: 1px solid $color-line;
+      background: white;
+    }
+  }
+}
+
+.mi-btn-danger {
+  color: white;
+  background: $color-text-danger;
+  border: 1px solid $color-text-danger;
+  &:hover {
+    background: $color-text-danger-press;
+    border: 1px solid $color-text-danger-press;
+  }
+  &.disabled{
+    background: $color-text-danger-disabled;
+    border: 1px solid $color-text-danger-disabled;
+  }
+}
+
+
+.mi-btn-success {
+  color: white;
+  background: $color-btn-success;
+  border: 1px solid $color-btn-success;
+  &:hover, &:active {
+    background: $color-btn-success-press;
+    border: 1px solid $color-btn-success-press;
+  }
+  &.disabled{
+    background: $color-btn-success-disabled;
+    border: 1px solid $color-btn-success-disabled;
+  }
+}

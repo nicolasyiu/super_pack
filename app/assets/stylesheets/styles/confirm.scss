@@ -1,0 +1,69 @@
+.mi-confirm {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: $z-index-confirm;
+  background: rgba(0, 0, 0, 0.4);
+  height: 100%;
+  .dialog {
+    background: white;
+    border-radius: 5px;
+    width: 90%;
+    max-width: 280px;
+    min-height: 150px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    > .title {
+      padding: 8px 15px;
+      font-weight: bold;
+      margin: 8px 0 0 0;
+      font-size: 13pt;
+    }
+
+    > .body {
+      padding: 8px 15px 20px 15px;
+      margin-bottom: $num-button-height;
+    }
+
+    > .footer {
+      position: absolute;
+      bottom: 0;
+      height: $num-button-height;
+      border-top: 1px solid $border-color;
+      width: 100%;
+      &:before, &:after {
+        clear: both;
+      }
+      > button {
+        -webkit-appearance: none;
+        background: white;
+        border: none;
+        text-align: center;
+        vertical-align: middle;
+        box-shadow: none;
+        outline: none;
+        display: block;
+        float: left;
+        width: 50%;
+        height: 100%;
+        &:hover,&:active {
+          background: $hover;
+        }
+        &.cancel {
+          border-radius: 0 0 0 5px;
+        }
+
+        &.confirm {
+          color: $color-text-orange;
+          border-left: 1px solid $border-color;
+          border-radius: 0 0 5px 0;
+        }
+      }
+    }
+  }
+}

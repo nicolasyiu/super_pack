@@ -1,0 +1,92 @@
+.mi-modal-view {
+  display: none;
+  position: fixed;
+  z-index: $z-index-modal-view;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #F9F9F9;
+  > .header {
+    background-color: $blue;
+    color: white;
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 45px;
+    line-height: $num-header-height;
+    font-size: 12pt;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: center;
+  }
+  > .header > .title {
+    display: inline-block;
+    line-height: $num-header-height;
+    font-size: 12pt;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: center;
+    font-weight: bolder;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+  }
+  > .header > .left {
+    display: inline-block;
+    position: absolute;
+    left: 8px;
+    top: 0;
+    height: $num-header-height;
+    cursor: pointer;
+    &:hover {
+      color: $color-white-press;
+    }
+  }
+  > .header > .right {
+    display: inline-block;
+    position: absolute;
+    right: 8px;
+    top: 0;
+    height: $num-header-height;
+    vertical-align: middle;
+    cursor: pointer;
+    &:hover {
+      color: $color-white-press;
+    }
+  }
+  > .body {
+    position: absolute;
+    top: $num-header-height;
+    left: 0;
+    right: 0;
+    bottom: $num-header-height;
+    overflow-x: hidden;
+    overflow-y: auto;
+    &.no-footer{
+      bottom: 0;
+    }
+  }
+  > .footer {
+    border-top: 1px solid $border-color;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 2px 5px;
+    margin: 0;
+    height: $num-header-height;
+    vertical-align: middle;
+    background: white;
+    > button {
+      @include mix_button;
+      height: $num-button-normal-height;
+      margin: 2px 5px;
+    }
+  }
+}

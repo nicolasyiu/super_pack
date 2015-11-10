@@ -1,0 +1,34 @@
+//公共库
+@import "../base/mi_bootstrap";
+@import "../base/constant";
+@import "../base/mixins";
+//样式
+@import "body";
+@import "header";
+@import "content";
+@import "footer";
+@import "list";
+@import "block";
+@import "text";
+@import "top_menu";
+@import "input_dialog";
+@import "loading";
+@import "toast";
+@import "select";
+@import "empty";
+@import "modal_view";
+@import "lattice";
+@import "button";
+@import "switch";
+@import "confirm";
+@import "digg_pagination";
+@import "badge";
+@import "option_menu";
+@import "cash_back_logo";
+@import "red_bag";
+@import "activity_list";
+
+//公共库
+
+//扩展样式
+@import "../*";

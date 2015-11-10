@@ -1,0 +1,21 @@
+.cash-back-logo {
+  height: 38px;
+  width: 100px;
+  color: $color-text-green;
+  border: 2px solid $color-text-green;
+  font-size: 20px;
+  position: absolute;
+  right: 25px;
+  bottom: 22px;
+  opacity: 0.8;
+  line-height: 32px;
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 8px;
+  transform: rotate(-20deg);
+  -webkit-transform: rotate(-20deg);
+  &:after {
+    content: '物流返款';
+  }
+}
