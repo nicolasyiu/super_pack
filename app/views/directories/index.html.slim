@@ -1,4 +1,4 @@
-h5
+h5(data-root_path=params[:root_path] data-extra_path=params[:extra_path])
   span &nbsp;&nbsp;
   =path_split_links params[:extra_path]
 .panel.panel-default
@@ -7,10 +7,30 @@ h5
   table.table.table-hover
     - @directories.each do |item|
       tr
-        td
+        td(data-item_path="#{params[:extra_path]}/#{item.name}" data-item_name=item.name)
           - if item.file?
             span.glyphicon(style="color:gray" class=file_icon_style(item.path)) &nbsp;
             a(href=directory_path(1)+"?root_path=#{params[:root_path]}&extra_path=#{params[:extra_path]}/#{item.name}")=item.name
           -else
             span.glyphicon.glyphicon-folder-open(style="color:#FFBF2E") &nbsp;
             a(href=directories_path+"?extra_path=#{params[:extra_path]}/#{item.name}")=item.name
+
+          span.glyphicon.glyphicon-option-horizontal.pull-right.file-actions-btn(style="color:#ddd" data-item_path="#{params[:extra_path]}/#{item.name}" data-item_name=item.name)
+
+/重命名文件夹对话框
+.mi-input-dialog#rename-dialog
+  .dialog
+    p.title 重命名
+    .body
+      input(placeholder='请输入新文件名')
+    .footer
+      button.cancel 取消
+      button.confirm 确定
+
+/文件修改对话框菜单
+.mi-option-menu#file-actions-menu
+  .body
+    .header 目录
+    button.mi-btn.mi-btn-large.mi-border-btn-danger.rename 重命名
+    button.mi-btn.mi-btn-large.mi-btn-danger.delete 删除
+    button.mi-btn.mi-btn-large.mi-border-btn-danger.cancel 取消

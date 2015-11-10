@@ -23,6 +23,7 @@
 //= require views/score_request_dialog_view
 //= require pages/app_page
 //= require pages/directory_page
+//= require pages/directories_page
 //重写alert
 window.alert = function (msg) {
     $.miToast(msg);
@@ -40,6 +41,8 @@ var page_url = window.location.pathname;
 var page;
 if (/directories\/\d/.test(page_url)) {
     page = new DirectoryPage();
+}else if(/directories/.test(page_url)){
+    page = new DirectoriesPage();
 }
 
 if (page != undefined) {
