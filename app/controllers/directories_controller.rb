@@ -15,6 +15,14 @@ class DirectoriesController < ApplicationController
   def edit
   end
 
+  def update
+    file_path = "#{params[:root_path]}/#{params[:extra_path]}"
+    File.open(file_path, 'w+') do |file|
+      file.write(params[:content])
+    end
+    render json: {msg: 'ok'}
+  end
+
   def new
   end
 end

@@ -3,7 +3,6 @@
 <head>
   <title>Packaging</title>
   <%= stylesheet_link_tag 'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
   <meta id="viewport" name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,initial-scale=1,user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -12,5 +11,41 @@
 
 <%= yield %>
 
+<!--进度条-->
+<div class="mi-loading">
+  <div class="icon">
+    <img src="<%= asset_path('icons/icon_loading.png') %>">
+  </div>
+  <p class="label">
+    打包
+  </p>
+
+  <div class="points">
+    <i class="one"></i>
+    <i class="two"></i>
+    <i class="three"></i>
+  </div>
+</div>
+
+<!--toast-->
+<div class="mi-toast">
+</div>
+
+<!--confirm-->
+<div class="mi-confirm">
+  <div class="dialog">
+    <p class="title">警告</p>
+
+    <div class="body">
+    </div>
+    <div class="footer">
+      <button class="cancel">取消</button>
+      <button class="confirm">确定</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<%= javascript_include_tag 'application' %>
 </body>
 </html>
