@@ -1,0 +1,12 @@
+h5
+  span &nbsp;&nbsp;
+  =path_split_links params[:extra_path]
+.panel.panel-default
+  .panel-heading
+    span 当前目录&nbsp;
+  .panel-body
+    - if %w(png jpg gif).include?(@suffix)
+      =image_tag("data:image/#{@suffix};base64,#{Base64.encode64(@content)}")
+    -else
+      textarea.form-control(readonly rows='30%')
+        =@content

@@ -1,2 +1,16 @@
-h1 Directories#index
-p Find me in app/views/directories/index.html.slim
+h5
+  span &nbsp;&nbsp;
+  =path_split_links params[:extra_path]
+.panel.panel-default
+  .panel-heading
+    span 当前目录&nbsp;
+  table.table.table-hover
+    - @directories.each do |item|
+      tr
+        td
+          - if item.file?
+            span.glyphicon(style="color:gray" class=file_icon_style(item.path)) &nbsp;
+            a(href=directory_path(1)+"?root_path=#{params[:root_path]}&extra_path=#{params[:extra_path]}/#{item.name}")=item.name
+          -else
+            span.glyphicon.glyphicon-folder-open(style="color:#FFBF2E") &nbsp;
+            a(href=directories_path+"?extra_path=#{params[:extra_path]}/#{item.name}")=item.name
