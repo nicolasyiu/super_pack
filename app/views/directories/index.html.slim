@@ -4,9 +4,16 @@ h5(data-root_path=params[:root_path] data-extra_path=params[:extra_path])
 .panel.panel-default
   .panel-heading
     span 当前目录&nbsp;
-    button.btn.btn-success.btn-xs.pull-right#new-file-btn
-      span.glyphicon.glyphicon-plus
-      ="新建"
+
+    .pull-right
+      button.btn.btn-warning.btn-xs#upload-file-btn
+        span.glyphicon.glyphicon-upload
+        span 上传
+      span &nbsp;&nbsp;
+      button.btn.btn-success.btn-xs#new-file-btn
+        span.glyphicon.glyphicon-plus
+        span 新建
+
   table.table.table-hover
     - @directories.each do |item|
       tr
