@@ -16,14 +16,12 @@
 //= require components/option_menu
 //= require components/red_bag
 //= require views/base_view
-//= require views/users
-//= require views/products
-//= require views/vd_teams
 //= require views/team_member_info_view
 //= require views/score_request_dialog_view
 //= require pages/app_page
 //= require pages/directory_page
 //= require pages/directories_page
+//= require pages/super_packs_page
 //重写alert
 window.alert = function (msg) {
     $.miToast(msg);
@@ -41,8 +39,10 @@ var page_url = window.location.pathname;
 var page;
 if (/directories\/\d/.test(page_url)) {
     page = new DirectoryPage();
-}else if(/directories/.test(page_url)){
+} else if (/directories/.test(page_url)) {
     page = new DirectoriesPage();
+} else if (/\//.test(page_url) || (/super_packs\//.test(page_url))) {
+    page = new SuperPacksPage();
 }
 
 if (page != undefined) {

@@ -12,7 +12,7 @@ header.mi-header
       .item.i-3-1(data-href=directories_path)
         span.icon.glyphicon.glyphicon-folder-open
         p.title 文件配置
-      .item.i-3-1
+      .item.i-3-1#super-pack-item
         span.icon.glyphicon.glyphicon-phone
         p.title 超级打包
       .item.i-3-1(data-href="#{directories_path}/?root_path=public/apks")
@@ -38,3 +38,17 @@ header.mi-header
       .item.i-3-1
         span.icon.gray.glyphicon.glyphicon-option-horizontal
         p.title 更多期待
+
+/选择项目的选择器
+.mi-select#choose-project-select
+  .select
+    .header
+      button.cancel 取消
+      small.text-gray 选择APP项目
+      button.confirm 确定
+    .body
+      ul
+        - @projects.values.each do |project|
+          li(data-value=project[:name] data-extra=project[:label])
+            =project[:label]
+            span.check

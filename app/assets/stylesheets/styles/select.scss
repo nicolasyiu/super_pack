@@ -33,7 +33,7 @@
           background: $hover;
         }
       }
-      button.cancel{
+      button.cancel {
         position: absolute;
         left: 0;
         top: 0;
@@ -47,6 +47,8 @@
     }
     .body {
       width: 100%;
+      max-height: 420px;
+      overflow-y: auto;
       border-top: 1px solid $color-line;
       padding-left: 12px;
     }

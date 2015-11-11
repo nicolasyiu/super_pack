@@ -1,0 +1,13 @@
+/选择项目flavor的选择器
+.mi-select#choose-flavors-select
+  .select
+    .header
+      button.cancel 取消
+      small.text-gray 选择flavor
+      button.confirm 确定
+    .body
+      ul
+        - @flavors.each_with_index do |flavor, index|
+          li(data-value=flavor.name data-extra=flavor.path)
+            =flavor.name
+            span.check{class="#{index==0 ? 'glyphicon glyphicon-ok-circle':''}"}
