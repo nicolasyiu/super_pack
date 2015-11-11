@@ -169,12 +169,14 @@ var DirectoriesPage = (function () {
             method: 'delete',
             success: function (data) {
                 $.miLoading('hide');
-                $.miToast("删除成功", function (data) {
-                    window.location.reload();
+                getCurrentFileTR().hide(600, function () {
+                    $(this).remove();
+                    $.miToast("删除成功");
                 });
             }, error: function (data) {
                 $.miLoading('hide');
-                $.miToast("删除失败");
+                console.log(data);
+                $.miToast("删除失败:{0}".format(data.responseJSON.error));
             }
 
         });
@@ -216,6 +218,14 @@ var DirectoriesPage = (function () {
      */
     function getCurrentFileName() {
         return $fileActionsMenu.data("item_name");
+    }
+
+    /**
+     * 获取当前选中文件的TR
+     * @returns {*|jQuery}
+     */
+    function getCurrentFileTR() {
+        return $("td[data-item_name='{0}']".format(getCurrentFileName())).parent();
     }
 
     return DirectoriesPage;

@@ -55,12 +55,19 @@ class DirectoriesController < ApplicationController
 
   def destroy
     is_file = File.file?(params[:path])
-    num = File.delete(params[:path]) if is_file
-    code = Dir.delete(params[:path]) unless is_file
+    error = ''
+
+    begin
+      num = File.delete(params[:path]) if is_file
+      code = Dir.delete(params[:path]) unless is_file
+    rescue Exception => e
+      error = e.message
+    end
+
     if (is_file && num>0) || (!is_file && code==0)
       render json: {msg: 'ok'}
     else
-      render json: {msg: 'error'}, status: 400
+      render json: {msg: 'error', error: error}, status: 400
     end
   end
 

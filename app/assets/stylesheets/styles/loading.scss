@@ -119,6 +119,7 @@
   vertical-align: middle;
   border-radius: 5px;
   padding: 12px;
+  word-wrap: break-word;
   @include float-middle-center;
   .icon > img {
     width: 35px;
