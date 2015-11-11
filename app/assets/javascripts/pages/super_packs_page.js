@@ -87,7 +87,9 @@ var SuperPacksPage = (function () {
             },
             success: function (data) {
                 $.miLoading('hide');
-                $.miToast("启动打包成功");
+                $.miToast("启动打包成功", function () {
+                    window.location.reload();
+                });
             }, error: function (data) {
                 $.miLoading('hide');
                 $.miToast("启动失败：" + data.responseJSON.error);
