@@ -52,4 +52,6 @@ header.mi-header
           li(data-value=project[:name] data-extra=project[:label])
             span.glyphicon.glyphicon-screenshot.icon-dir &nbsp;
             =project[:label]
+            - if SuperPack.exist?(project[:name])
+              span.text.text-danger （打包已锁定）
             span.check

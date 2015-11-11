@@ -11,6 +11,7 @@ var SuperPacksPage = (function () {
     SuperPacksPage.prototype = new AppPage();
 
     SuperPacksPage.prototype.select_pack_project = '';//选中要打包的应用
+    SuperPacksPage.prototype.select_pack_project_label = '';//选中要打包的应用
     SuperPacksPage.prototype.select_pack_flavor = '';//选中要打包的应用的flavor
 
     /**
@@ -37,6 +38,7 @@ var SuperPacksPage = (function () {
         });
         $chooseProjectSelect.bind('confirmed', function (event, data) {
             _this.select_pack_project = data.value;
+            _this.select_pack_project_label = data.extra;
             _this.actionGetFlavors(data.value);
         });
     };
@@ -59,7 +61,13 @@ var SuperPacksPage = (function () {
         $select.miSelect();
         $select.unbind().bind('confirmed', function (event, data) {
             _this.select_pack_flavor = data.value;
-            _this.actionCreateSuperPack();
+            $.miConfirm({
+                title: '确定要启动打包吗?',
+                body: "<span class='text text-warning'>启动后项目将被暂时锁定，直至打包结束！</span>{0}-{1}".format(_this.select_pack_project_label, _this.select_pack_flavor)
+            }, function () {
+                _this.actionCreateSuperPack();
+            });
+
         });
     };
 
@@ -82,7 +90,7 @@ var SuperPacksPage = (function () {
                 $.miToast("启动打包成功");
             }, error: function (data) {
                 $.miLoading('hide');
-                $.miToast("启动失败："+data.responseJSON.error);
+                $.miToast("启动失败：" + data.responseJSON.error);
             }
 
         });
