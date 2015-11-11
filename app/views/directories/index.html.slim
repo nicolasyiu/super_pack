@@ -1,5 +1,5 @@
 =content_for :tab_title do
-  '文件浏览'
+  '文件浏览
 end
 
 header.mi-header
@@ -43,7 +43,10 @@ header.mi-header
             - if item.file?
               span.glyphicon.icon-file(class=file_icon_style(item.path)) &nbsp;
               a(href=directory_path(1)+"?root_path=#{@root_path}&extra_path=#{params[:extra_path]}/#{item.name}#{@project[:name]? ("&project="+@project[:name]): ''}")
-                =item.name
+                -if item.name.to_s.end_with?('.lock')
+                  span.text.text-danger=item.name
+                -else
+                  =item.name
               span &nbsp;
               small.text.text-gray
                 =item.size.to_size

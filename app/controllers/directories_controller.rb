@@ -33,8 +33,8 @@ class DirectoriesController < ApplicationController
     file_path = "#{params[:root_path]}/#{params[:extra_path]}"
     @suffix = file_path.split(".").last
     @content = File.read(file_path)
-    unless %w(png jpg gif json xml).include?(@suffix)
-      send_data File.new(file_path), :filename=>Directory.new(file_path).name, :type=>"text/plain"
+    if %w(apk jar).include?(@suffix)
+      send_data File.new(file_path), :filename => Directory.new(file_path).name, :type => "text/plain"
     end
   end
 

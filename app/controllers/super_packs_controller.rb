@@ -10,8 +10,13 @@ class SuperPacksController < ApplicationController
 
     return render json: {msg: 'error', error: "#{project[:label]}打包被锁定，请稍等！"}, status: 400 if File.exist?(lock_file_path)
 
+    #FIXME:创建者id修改
+    lock_content = {
+        flavor: params[:flavor],
+        creator_id: 1
+    }
     code = File.open(lock_file_path, 'w+') do |file|
-      file.write("#TODO:some thing to do #{params[:flavor]}")
+      file.write(lock_content.to_json)
     end
     if code
       render json: {msg: 'ok'}
