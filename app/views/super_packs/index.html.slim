@@ -50,7 +50,7 @@ header.mi-header
       ul
         - @projects.values.each do |project|
           li(data-value=project[:name] data-extra=project[:label])
-            span.glyphicon.glyphicon-screenshot.icon-dir &nbsp;
+            span.glyphicon.glyphicon-plane &nbsp;
             =project[:label]
             - if SuperPack.exist?(project[:name])
               span.text.text-danger （打包已锁定）
