@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources 'directories' do
     collection do
       put 'rename', to: :rename
+      post 'upload', to: :upload
     end
   end
 

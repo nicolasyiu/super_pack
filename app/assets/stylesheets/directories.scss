@@ -1,3 +1,29 @@
 // Place all the styles related to the directories controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.icon-dir {
+  color: #FFBF2E;
+}
+
+.icon-file {
+  color: gray;
+}
+
+.icon-file-item-action {
+  color: #ddd;
+}
+
+//上传文件的入口
+.pull-right > .upload-file-input {
+  width: 50px;
+  display: inline-block;
+  position: absolute;
+  float: left;
+  opacity: 0;
+}
+
+//预览文件
+img.img-preview {
+  max-width: 100%;
+}
+

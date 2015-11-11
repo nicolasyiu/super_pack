@@ -27,6 +27,15 @@ class DirectoriesController < ApplicationController
     end
   end
 
+  def upload
+    file = params[:file]
+    @filename = file.original_filename
+    File.open("#{params[:dir_path]}/#{@filename}", 'wb') do |f|
+      f.write(file.read)
+    end
+    render json: {msg: 'ok', filename: @filename}
+  end
+
   def update
     file_path = "#{params[:root_path]}/#{params[:extra_path]}"
     File.open(file_path, 'w+') do |file|
@@ -52,6 +61,17 @@ class DirectoriesController < ApplicationController
       render json: {msg: 'ok'}
     else
       render json: {msg: 'error'}, status: 400
+    end
+  end
+
+  protected
+  def uploadfile(file, dir_path)
+    if !file.original_filename.empty?
+      @filename = file.original_filename
+      File.open("#{dir_path}/#{@filename}", "wb") do |f|
+        f.write(file.read)
+      end
+      return @filename
     end
   end
 end

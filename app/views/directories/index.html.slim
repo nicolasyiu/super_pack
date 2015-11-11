@@ -6,6 +6,7 @@ h5(data-root_path=params[:root_path] data-extra_path=params[:extra_path])
     span 当前目录&nbsp;
 
     .pull-right
+      input.upload-file-input#upload-file-input(type='file')
       button.btn.btn-warning.btn-xs#upload-file-btn
         span.glyphicon.glyphicon-upload
         span 上传
@@ -19,13 +20,13 @@ h5(data-root_path=params[:root_path] data-extra_path=params[:extra_path])
       tr
         td(data-item_path="#{params[:extra_path]}/#{item.name}" data-item_name=item.name)
           - if item.file?
-            span.glyphicon(style="color:gray" class=file_icon_style(item.path)) &nbsp;
+            span.glyphicon.icon-file(class=file_icon_style(item.path)) &nbsp;
             a(href=directory_path(1)+"?root_path=#{params[:root_path]}&extra_path=#{params[:extra_path]}/#{item.name}")=item.name
           -else
-            span.glyphicon.glyphicon-folder-open(style="color:#FFBF2E") &nbsp;
+            span.glyphicon.glyphicon-folder-open.icon-dir &nbsp;
             a(href=directories_path+"?extra_path=#{params[:extra_path]}/#{item.name}")=item.name
 
-          span.glyphicon.glyphicon-option-horizontal.pull-right.file-actions-btn(style="color:#ddd" data-item_path="#{params[:extra_path]}/#{item.name}" data-item_name=item.name)
+          span.glyphicon.glyphicon-option-horizontal.pull-right.file-actions-btn.icon-file-item-action(data-item_path="#{params[:extra_path]}/#{item.name}" data-item_name=item.name)
 
 /选择文件类型的选择器
 .mi-select#choose-filetype-select
@@ -37,11 +38,11 @@ h5(data-root_path=params[:root_path] data-extra_path=params[:extra_path])
     .body
       ul
         li(data-value='dir' data-extra='文件夹')
-          span.glyphicon.glyphicon-folder-open(style="color:#FFBF2E")
+          span.glyphicon.glyphicon-folder-open.icon-dir
           span &nbsp;&nbsp;文件夹
           span.check
         li(data-value='file' data-extra='文件')
-          span.glyphicon.glyphicon-list-alt(style="color:gray")
+          span.glyphicon.glyphicon-list-alt.icon-file
           span &nbsp;&nbsp;文件
           span.check.glyphicon.glyphicon-ok-circle
 
@@ -49,8 +50,8 @@ h5(data-root_path=params[:root_path] data-extra_path=params[:extra_path])
 .mi-input-dialog#new-file-dialog
   .dialog
     p.title
-      span.glyphicon.glyphicon-list-alt.file  文件
-      span.glyphicon.glyphicon-folder-open.dir  文件夹
+      span.glyphicon.glyphicon-list-alt.icon-file.file  文件
+      span.glyphicon.glyphicon-folder-open.icon-dir.dir  文件夹
     .body
       input(placeholder='请输入文件(夹)名称')
     .footer

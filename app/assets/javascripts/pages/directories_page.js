@@ -14,6 +14,8 @@ var DirectoriesPage = (function () {
     var $chooseFiletypeSelect; //文件类型选择器
     var $newFileDialog;     //文件名输入框
 
+    var $newFileInput;     //上传文件的input
+
     function DirectoriesPage() {
         _this = this;
     }
@@ -38,6 +40,7 @@ var DirectoriesPage = (function () {
         $chooseFiletypeSelect = $("#choose-filetype-select");
         $newFileBtn = $("#new-file-btn");
         $newFileDialog = $("#new-file-dialog");
+        $newFileInput = $("#upload-file-input");
     };
 
     /**
@@ -81,6 +84,9 @@ var DirectoriesPage = (function () {
         });
         $newFileDialog.bind('confirmed', function (event, data) {
             _this.actionCreateDir(data, $(this).data('filetype'));
+        });
+        $newFileInput.unbind().change(function (event) {
+            _this.actionFileUpload();
         });
     };
 
@@ -168,6 +174,36 @@ var DirectoriesPage = (function () {
                 $.miToast("删除失败");
             }
 
+        });
+    };
+
+    /**
+     * 上传文件
+     */
+    DirectoriesPage.prototype.actionFileUpload = function () {
+        var data = new FormData();
+        data.append("file", $newFileInput[0].files[0]);
+        data.append("dir_path", "{0}/{1}".format(_this.dir_root_path, _this.dir_extra_path));
+        data.append("authenticity_token", _this.getAuthenticityToken());
+        data.append("utf8", "√");
+
+        $.miLoading("show");
+        $.ajax({
+            url: '/directories/upload',
+            type: 'POST',
+            processData: false,
+            contentType: false,
+            data: data,
+            success: function (data) {
+                $.miLoading("hide");
+                $.miToast("上传成功", function () {
+                    window.location.reload();
+                });
+            },
+            error: function (data) {
+                $.miLoading("hide");
+                $.miToast("上传失败");
+            }
         });
     };
 
