@@ -4,20 +4,26 @@ end
 
 header.mi-header
   h2
-    span="#{@project[:label]}文件&nbsp;".html_safe
-    span.glyphicon.glyphicon-chevron-down
+    - unless params[:root_path]
+      span="#{@project[:label]}文件&nbsp;".html_safe
+      span.glyphicon.glyphicon-chevron-down
+    - else
+      span 文件浏览
   .left.back
     span.glyphicon.glyphicon-menu-left 返回
+  .right(data-href='/')
+    span.glyphicon.glyphicon-home
 
-.mi-top-menu#dir-projects-top-menu
-  ul
-    - @projects.values.each do |item|
-      li(data-project=item[:name])
-        =item[:label]
-        - if params[:project]==item[:name]
-          span.check.glyphicon.glyphicon-ok-circle
-        -else
-          span.check
+- unless params[:root_path]
+  .mi-top-menu#dir-projects-top-menu
+    ul
+      - @projects.values.each do |item|
+        li(data-project=item[:name])
+          =item[:label]
+          - if params[:project]==item[:name]
+            span.check.glyphicon.glyphicon-ok-circle
+          -else
+            span.check
 
 =content_for :content do
   h5(data-root_path=@root_path data-extra_path="#{params[:extra_path]}" data-project=params[:project])
@@ -25,7 +31,10 @@ header.mi-header
     =path_split_links params[:extra_path]
   .panel.panel-default
     .panel-heading
-      = link_to @project[:label], "/directories?project=#{@project[:name]}"
+      - unless params[:root_path]
+        = link_to @project[:label], "/directories?project=#{@project[:name]}"
+      - else
+        '文件浏览
 
     table.table.table-hover
       - @directories.each do |item|
@@ -33,14 +42,14 @@ header.mi-header
           td(data-item_path="#{params[:extra_path]}/#{item.name}" data-item_name=item.name)
             - if item.file?
               span.glyphicon.icon-file(class=file_icon_style(item.path)) &nbsp;
-              a(href=directory_path(1)+"?root_path=#{@root_path}&extra_path=#{params[:extra_path]}/#{item.name}&project=#{@project[:name]}")
+              a(href=directory_path(1)+"?root_path=#{@root_path}&extra_path=#{params[:extra_path]}/#{item.name}#{@project[:name]? ("&project="+@project[:name]): ''}")
                 =item.name
               span &nbsp;
               small.text.text-gray
                 =item.size.to_size
             -else
               span.glyphicon.glyphicon-folder-open.icon-dir &nbsp;
-              a(href=directories_path+"?extra_path=#{params[:extra_path]}/#{item.name}&project=#{@project[:name]}")=item.name
+              a(href=directories_path+"?extra_path=#{params[:extra_path]}/#{item.name}#{@project[:name]? ("&project="+@project[:name]): ''}#{params[:root_path]? ("&root_path="+params[:root_path]): ''}")=item.name
 
             span.glyphicon.glyphicon-option-horizontal.pull-right.file-actions-btn.icon-file-item-action(data-item_path="#{params[:extra_path]}/#{item.name}" data-item_name=item.name)
 

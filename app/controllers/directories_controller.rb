@@ -21,7 +21,7 @@ class DirectoriesController < ApplicationController
     @projects = PROJECTS
     params[:project] ||= 'ad_market'
     @project = @projects[params[:project]]
-    @root_path ="/Users/saxer/Develope/Bitbucket/#{@project[:path]}"
+    @root_path = params[:root_path] ||"/Users/saxer/Develope/Bitbucket/#{@project[:path]}"
     dir_path = "#{@root_path}/#{params[:extra_path]}"
     @directories = Directory.children(dir_path)
   end
