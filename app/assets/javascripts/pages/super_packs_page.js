@@ -10,6 +10,9 @@ var SuperPacksPage = (function () {
 
     SuperPacksPage.prototype = new AppPage();
 
+    SuperPacksPage.prototype.select_pack_project = '';//选中要打包的应用
+    SuperPacksPage.prototype.select_pack_flavor = '';//选中要打包的应用的flavor
+
     /**
      * 页面元素初始化
      */
@@ -33,7 +36,7 @@ var SuperPacksPage = (function () {
             $chooseProjectSelect.miSelect('show', 'ad_market');
         });
         $chooseProjectSelect.bind('confirmed', function (event, data) {
-            console.log(data);
+            _this.select_pack_project = data.value;
             _this.actionGetFlavors(data.value);
         });
     };
@@ -46,18 +49,56 @@ var SuperPacksPage = (function () {
     };
 
     /**
+     * 初始化flavor选择器
+     * @param html
+     */
+    SuperPacksPage.prototype.actionInitFlavorSelect = function (html) {
+        $("#choose-flavors-select").remove();
+        $("body").append(html);
+        var $select = $("#choose-flavors-select");
+        $select.miSelect();
+        $select.unbind().bind('confirmed', function (event, data) {
+            _this.select_pack_flavor = data.value;
+            _this.actionCreateSuperPack();
+        });
+    };
+
+    /**
+     * 创建超级打包任务
+     */
+    SuperPacksPage.prototype.actionCreateSuperPack = function () {
+        $.miLoading('show');
+        $.ajax({
+            url: "/super_packs",
+            method: 'post',
+            data: {
+                project: _this.select_pack_project,
+                flavor: _this.select_pack_flavor,
+                utf8: "√",
+                authenticity_token: _this.getAuthenticityToken()
+            },
+            success: function (data) {
+                $.miLoading('hide');
+                $.miToast("启动打包成功");
+            }, error: function (data) {
+                $.miLoading('hide');
+                $.miToast("启动失败："+data.responseJSON.error);
+            }
+
+        });
+    };
+
+    /**
      * 获取项目的flavor
      */
     SuperPacksPage.prototype.actionGetFlavors = function (project_name) {
         $.miLoading('show');
-        $("#choose-flavors-select").remove();
         $.ajax({
             url: "/super_packs/flavors?project={0}".format(project_name),
             method: 'get',
             success: function (data) {
                 $.miLoading('hide');
-                $("body").append(data);
-                $("#choose-flavors-select").miSelect();
+                _this.actionInitFlavorSelect(data);
             }, error: function (data) {
                 $.miLoading('hide');
                 $.miToast("获取flavor列表失败");
