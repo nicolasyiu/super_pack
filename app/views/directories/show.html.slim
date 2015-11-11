@@ -1,14 +1,22 @@
-h5(data-root_path=params[:root_path] data-extra_path=params[:extra_path])
-  span &nbsp;&nbsp;
-  =path_split_links params[:extra_path]
-.panel.panel-default
-  .panel-heading
-    span 当前目录&nbsp;
-    - if @suffix=='json'
-      button.btn.btn-success.btn-xs.pull-right.disabled#save_modify 保存修改
-  .panel-body
-    - if %w(png jpg gif).include?(@suffix)
-      =image_tag("data:image/#{@suffix};base64,#{Base64.encode64(@content)}", class: 'img-preview')
-    - else
-      textarea.form-control#file_content(rows='30%')
-        =@content
+=content_for :tab_title do  '文件详情' end
+
+header.mi-header
+  h2 文件详情
+  .left.back
+    span.glyphicon.glyphicon-menu-left 返回
+
+=content_for :content do
+  h5(data-root_path=params[:root_path] data-extra_path=params[:extra_path])
+    span &nbsp;&nbsp;
+    =path_split_links params[:extra_path]
+  .panel.panel-default
+    .panel-heading
+      span 文件详情&nbsp;
+      - if @suffix=='json'
+        button.btn.btn-success.btn-xs.pull-right.disabled#save_modify 保存修改
+    .panel-body
+      - if %w(png jpg gif).include?(@suffix)
+        =image_tag("data:image/#{@suffix};base64,#{Base64.encode64(@content)}", class: 'img-preview')
+      - else
+        textarea.form-control#file_content(rows='30%')
+          =@content

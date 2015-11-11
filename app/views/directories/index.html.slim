@@ -1,36 +1,57 @@
-h5(data-root_path=params[:root_path] data-extra_path=params[:extra_path])
-  span &nbsp;&nbsp;
-  =path_split_links params[:extra_path]
-.panel.panel-default
-  .panel-heading
-    span 当前目录&nbsp;
+=content_for :tab_title do
+  '文件浏览'
+end
 
-    .pull-right
-      input.upload-file-input#upload-file-input(type='file')
-      button.btn.btn-warning.btn-xs#upload-file-btn
-        span.glyphicon.glyphicon-upload
-        span 上传
-      span &nbsp;&nbsp;
-      button.btn.btn-success.btn-xs#new-file-btn
-        span.glyphicon.glyphicon-plus
-        span 新建
+header.mi-header
+  h2
+    span="#{@project[:label]}文件&nbsp;".html_safe
+    span.glyphicon.glyphicon-chevron-down
+  .left.back
+    span.glyphicon.glyphicon-menu-left 返回
 
-  table.table.table-hover
-    - @directories.each do |item|
-      tr
-        td(data-item_path="#{params[:extra_path]}/#{item.name}" data-item_name=item.name)
-          - if item.file?
-            span.glyphicon.icon-file(class=file_icon_style(item.path)) &nbsp;
-            a(href=directory_path(1)+"?root_path=#{params[:root_path]}&extra_path=#{params[:extra_path]}/#{item.name}")
-              =item.name
-            span &nbsp;
-            small.text.text-gray
-              =item.size.to_size
-          -else
-            span.glyphicon.glyphicon-folder-open.icon-dir &nbsp;
-            a(href=directories_path+"?extra_path=#{params[:extra_path]}/#{item.name}")=item.name
+.mi-top-menu#dir-projects-top-menu
+  ul
+    - @projects.values.each do |item|
+      li(data-project=item[:name])
+        =item[:label]
+        - if params[:project]==item[:name]
+          span.check.glyphicon.glyphicon-ok-circle
+        -else
+          span.check
 
-          span.glyphicon.glyphicon-option-horizontal.pull-right.file-actions-btn.icon-file-item-action(data-item_path="#{params[:extra_path]}/#{item.name}" data-item_name=item.name)
+=content_for :content do
+  h5(data-root_path=@root_path data-extra_path=params[:extra_path] data-project=params[:project])
+    span &nbsp;&nbsp;
+    =path_split_links params[:extra_path]
+  .panel.panel-default
+    .panel-heading
+      = link_to @project[:label], "/directories?project=#{@project[:name]}"
+
+    table.table.table-hover
+      - @directories.each do |item|
+        tr
+          td(data-item_path="#{params[:extra_path]}/#{item.name}" data-item_name=item.name)
+            - if item.file?
+              span.glyphicon.icon-file(class=file_icon_style(item.path)) &nbsp;
+              a(href=directory_path(1)+"?root_path=#{@root_path}&extra_path=#{params[:extra_path]}/#{item.name}&project=#{@project[:name]}")
+                =item.name
+              span &nbsp;
+              small.text.text-gray
+                =item.size.to_size
+            -else
+              span.glyphicon.glyphicon-folder-open.icon-dir &nbsp;
+              a(href=directories_path+"?extra_path=#{params[:extra_path]}/#{item.name}&project=#{@project[:name]}")=item.name
+
+            span.glyphicon.glyphicon-option-horizontal.pull-right.file-actions-btn.icon-file-item-action(data-item_path="#{params[:extra_path]}/#{item.name}" data-item_name=item.name)
+
+footer.mi-footer
+
+  button.mi-btn.mi-btn-large.mi-border-btn-danger#upload-file-btn
+    span.glyphicon.glyphicon-upload 上传文件
+    input.upload-file-input#upload-file-input(type='file')
+  button.mi-btn.mi-btn-large.mi-border-btn-success#new-file-btn
+    span.glyphicon.glyphicon-plus 创建
+
 
 /选择文件类型的选择器
 .mi-select#choose-filetype-select

@@ -1,8 +1,26 @@
 class DirectoriesController < ApplicationController
   def index
-    params[:root_path] ||="/Users/saxer/Develope/Bitbucket"
-    params[:extra_path] ||= "mi.android2/flavors"
-    dir_path = "#{params[:root_path]}/#{params[:extra_path]}"
+    @projects = {
+        'ad_market' => {
+            name: 'ad_market',
+            label: '升级提示APP',
+            path: 'ad_market/app/flavors'
+        },
+        'mi.android' => {
+            name: 'mi.android',
+            label: '觅恋APP',
+            path: 'mi.android2/flavors'
+        },
+        'glass' => {
+            name: 'glass',
+            label: '碎屏APP',
+            path: 'glass/code/trunk/flavors'
+        }
+    }
+    params[:project] ||= 'ad_market'
+    @project = @projects[params[:project]]
+    @root_path ="/Users/saxer/Develope/Bitbucket/#{@project[:path]}"
+    dir_path = "#{@root_path}/#{params[:extra_path]}"
     @directories = Directory.children(dir_path)
   end
 

@@ -14,12 +14,19 @@
 }
 
 //上传文件的入口
-.pull-right > .upload-file-input {
-  width: 50px;
+#upload-file-btn {
+  position: relative;
+}
+
+#upload-file-input {
+  min-width: 120px;
+  width: 100%;
   display: inline-block;
-  position: absolute;
-  float: left;
   opacity: 0;
+  height: 35px;
+  top: 0;
+  position: absolute;
+  left: 0;
 }
 
 //预览文件

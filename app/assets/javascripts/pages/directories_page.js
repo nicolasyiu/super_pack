@@ -3,6 +3,7 @@ var DirectoriesPage = (function () {
 
     var $path;
 
+    var $dirProjectsTopMenu;//文件顶部菜单
     var $itemTD;            //文件item表格
     var $itemActionBtn;     //文件操作按钮
     var $fileActionsMenu;   //文件操作对话框
@@ -24,6 +25,7 @@ var DirectoriesPage = (function () {
 
     DirectoriesPage.prototype.dir_root_path = ''; //文件路径
     DirectoriesPage.prototype.dir_extra_path = ''; //文件路径
+    DirectoriesPage.prototype.project = ''; //当前选中的app目录
 
     /**
      * 页面元素初始化
@@ -41,6 +43,7 @@ var DirectoriesPage = (function () {
         $newFileBtn = $("#new-file-btn");
         $newFileDialog = $("#new-file-dialog");
         $newFileInput = $("#upload-file-input");
+        $dirProjectsTopMenu = $("#dir-projects-top-menu");
     };
 
     /**
@@ -49,12 +52,16 @@ var DirectoriesPage = (function () {
     DirectoriesPage.prototype.onInitData = function () {
         _this.dir_root_path = $path.data('root_path');
         _this.dir_extra_path = $path.data('extra_path');
+        _this.project = $path.data('project');
     };
 
     /**
      * 页面元素的事件绑定开始了
      */
     DirectoriesPage.prototype.onBindEvent = function () {
+        $dirProjectsTopMenu.find("ul li[data-project]").click(function () {
+            window.location.href = "/directories?project=" + $(this).data('project');
+        });
         $itemActionBtn.unbind().click(function (event) {
             var $this = $(this);
             $fileActionsMenuHeader.html("<small class='text text-danger'>{0}</small>".format($this.data("item_name")));
