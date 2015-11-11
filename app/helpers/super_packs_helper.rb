@@ -1,0 +1,2 @@
+module SuperPacksHelper
+end

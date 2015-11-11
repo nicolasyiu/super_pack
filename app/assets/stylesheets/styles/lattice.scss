@@ -35,7 +35,10 @@
 
       > .icon {
         font-size: 25px;
-        color: $color-text-orange;
+        color: $color-yellow;
+        &.gray {
+          color: gray;
+        }
       }
       > .title {
         margin-top: 5px;
