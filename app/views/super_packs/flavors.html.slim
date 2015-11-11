@@ -9,5 +9,6 @@
       ul
         - @flavors.each_with_index do |flavor, index|
           li(data-value=flavor.name data-extra=flavor.path)
+            span.glyphicon.glyphicon-folder-open.icon-dir &nbsp;
             =flavor.name
             span.check{class="#{index==0 ? 'glyphicon glyphicon-ok-circle':''}"}

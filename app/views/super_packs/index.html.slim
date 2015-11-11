@@ -20,7 +20,7 @@ header.mi-header
         p.title 下载APK
     .row
       .item.i-3-1(data-href="http://jiagu.360.cn/protection")
-        span.icon.glyphicon.glyphicon-king
+        span.icon.glyphicon.glyphicon-lock
         p.title 应用加固
       .item.i-3-1(data-href="http://sign.apk.aihuo360.com")
         span.icon.glyphicon.glyphicon-pushpin
@@ -50,5 +50,6 @@ header.mi-header
       ul
         - @projects.values.each do |project|
           li(data-value=project[:name] data-extra=project[:label])
+            span.glyphicon.glyphicon-screenshot.icon-dir &nbsp;
             =project[:label]
             span.check
