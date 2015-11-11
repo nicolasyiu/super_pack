@@ -20,7 +20,7 @@ header.mi-header
           span.check
 
 =content_for :content do
-  h5(data-root_path=@root_path data-extra_path=params[:extra_path] data-project=params[:project])
+  h5(data-root_path=@root_path data-extra_path="#{params[:extra_path]}" data-project=params[:project])
     span &nbsp;&nbsp;
     =path_split_links params[:extra_path]
   .panel.panel-default

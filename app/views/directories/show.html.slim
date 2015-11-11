@@ -11,7 +11,7 @@ header.mi-header
     =path_split_links params[:extra_path]
   .panel.panel-default
     .panel-heading
-      span 文件详情&nbsp;
+      =link_to @project[:label], "/directories?project=#{@project[:name]}"
       - if @suffix=='json'
         button.btn.btn-success.btn-xs.pull-right.disabled#save_modify 保存修改
     .panel-body

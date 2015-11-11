@@ -1,22 +1,24 @@
 class DirectoriesController < ApplicationController
+  PROJECTS = {
+      'ad_market' => {
+          name: 'ad_market',
+          label: '升级提示APP',
+          path: 'ad_market/app/flavors'
+      },
+      'mi.android' => {
+          name: 'mi.android',
+          label: '觅恋APP',
+          path: 'mi.android2/flavors'
+      },
+      'glass' => {
+          name: 'glass',
+          label: '碎屏APP',
+          path: 'glass/code/trunk/flavors'
+      }
+  }
+
   def index
-    @projects = {
-        'ad_market' => {
-            name: 'ad_market',
-            label: '升级提示APP',
-            path: 'ad_market/app/flavors'
-        },
-        'mi.android' => {
-            name: 'mi.android',
-            label: '觅恋APP',
-            path: 'mi.android2/flavors'
-        },
-        'glass' => {
-            name: 'glass',
-            label: '碎屏APP',
-            path: 'glass/code/trunk/flavors'
-        }
-    }
+    @projects = PROJECTS
     params[:project] ||= 'ad_market'
     @project = @projects[params[:project]]
     @root_path ="/Users/saxer/Develope/Bitbucket/#{@project[:path]}"
@@ -25,6 +27,8 @@ class DirectoriesController < ApplicationController
   end
 
   def show
+    @projects = PROJECTS
+    @project = @projects[params[:project]]
     file_path = "#{params[:root_path]}/#{params[:extra_path]}"
     @suffix = file_path.split(".").last
     @content = File.read(file_path)

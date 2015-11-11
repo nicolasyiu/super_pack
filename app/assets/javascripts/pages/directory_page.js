@@ -72,7 +72,7 @@ var DirectoryPage = (function () {
             url: "/directories/1?root_path={0}&extra_path={1}".format(_this.file_root_path, _this.file_extra_path),
             method: 'put',
             data: {
-                content: $contentArea.val(),
+                content: ($contentArea.val() || $contentArea.text()),
                 utf8: "√",
                 authenticity_token: _this.getAuthenticityToken()
             },
