@@ -52,6 +52,8 @@ header.mi-header
           li(data-value=project[:name] data-extra=project[:label])
             span.glyphicon.glyphicon-plane &nbsp;
             =project[:label]
-            - if SuperPack.exist?(project[:name])
-              span.text.text-danger （打包已锁定）
+            - if SuperPack.locking?(project[:name])
+              span.text.text-danger （已锁定）
+            - if SuperPack.running?(project[:name])
+              span.text.text-success （打包中）
             span.check
