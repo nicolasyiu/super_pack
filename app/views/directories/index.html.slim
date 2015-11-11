@@ -21,7 +21,11 @@ h5(data-root_path=params[:root_path] data-extra_path=params[:extra_path])
         td(data-item_path="#{params[:extra_path]}/#{item.name}" data-item_name=item.name)
           - if item.file?
             span.glyphicon.icon-file(class=file_icon_style(item.path)) &nbsp;
-            a(href=directory_path(1)+"?root_path=#{params[:root_path]}&extra_path=#{params[:extra_path]}/#{item.name}")=item.name
+            a(href=directory_path(1)+"?root_path=#{params[:root_path]}&extra_path=#{params[:extra_path]}/#{item.name}")
+              =item.name
+            span &nbsp;
+            small.text.text-gray
+              =item.size.to_size
           -else
             span.glyphicon.glyphicon-folder-open.icon-dir &nbsp;
             a(href=directories_path+"?extra_path=#{params[:extra_path]}/#{item.name}")=item.name

@@ -23,9 +23,11 @@
       font-weight: bold;
       margin: 8px 0 0 0;
       font-size: 13pt;
+      word-wrap: break-word;
     }
 
     > .body {
+      word-wrap: break-word;
       padding: 8px 15px 20px 15px;
       margin-bottom: $num-button-height;
     }

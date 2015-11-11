@@ -1,9 +1,14 @@
 class Directory
   attr_accessor :name
   attr_accessor :path
+  attr_accessor :size
+  attr_accessor :birth_time
 
   def initialize(file_path)
     @path = file_path
+    @name = path.to_s.end_with?("/") ? path.split("/")[-1] : path.split("/").last
+    @size = File.size(file_path)
+    @birth_time = File.birthtime(file_path)
   end
 
   #文件或者目录名称
@@ -25,16 +30,6 @@ class Directory
 
   def file?
     File.file?(path)
-  end
-
-  #文件或者目录的名称
-  def name
-    _path = path.to_s
-    if _path.end_with?("/")
-      @name = path.split("/")[-1]
-    else
-      @name = path.split("/").last
-    end
   end
 
 end

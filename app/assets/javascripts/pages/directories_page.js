@@ -63,11 +63,14 @@ var DirectoriesPage = (function () {
             $fileActionsMenu.miOptionMenu('show');
         });
         $actionRenameBtn.click(function () {
-            $renameDialog.find(".dialog>.title").html("重命名<small class='text text-danger'>{0}</small>".format(getCurrentFileName()));
+            $renameDialog.find(".dialog>.title").html("重命名<small class='text text-warning'>{0}</small>".format(getCurrentFileName()));
             $renameDialog.miInputDialog('show');
         });
         $actionDeleteBtn.click(function () {
-            $.miConfirm("确定要删除<small class='text text-danger'>{0}</small>吗?".format(getCurrentFileName()), function () {
+            $.miConfirm({
+                title: "确定要删除吗?",
+                body: "<small class='text text-danger'>{0}</small>".format(getCurrentFileName())
+            }, function () {
                 _this.actionFileDelete();
             });
         });
