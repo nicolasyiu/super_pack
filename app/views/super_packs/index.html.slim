@@ -3,8 +3,16 @@
 end
 
 header.mi-header
-  h2
-    span 超级打包
+  h2  超级打包
+  .left(data-href=p_user_path(current_user.user_id))
+    span.glyphicon.glyphicon-option-vertical
+    '&nbsp;
+    img.circle(src=current_user.avatar_url)
+    '&nbsp;
+    =current_user.nick_name
+  .right(data-href=root_path)
+    span.glyphicon.glyphicon-refresh
+    '&nbsp;
 
 =content_for :content do
   .lattice
