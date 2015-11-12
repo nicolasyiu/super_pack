@@ -113,7 +113,7 @@ task :deploy => :environment do
 
     to :launch do
       queue "cd #{app_path} ; bundle install --without nothing"
-      # invoke :restart
+      invoke :restart
       # invoke :start
     end
   end
