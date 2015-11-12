@@ -34,7 +34,7 @@ class DirectoriesController < ApplicationController
     @suffix = file_path.split(".").last
     @content = File.read(file_path)
     if %w(apk jar).include?(@suffix)
-      send_data @content, :filename => Directory.new(file_path).name, :type => "file/apk"
+      send_data @content, :filename => Directory.new(file_path).name, :type => "file/#{@suffix}"
     end
   end
 
