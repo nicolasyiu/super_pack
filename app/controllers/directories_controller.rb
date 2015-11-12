@@ -1,22 +1,31 @@
 class DirectoriesController < ApplicationController
-  PROJECTS_ROOT = '/Users/saxer/Develope/Bitbucket'
-  PROJECTS = {
-      'ad_market' => {
-          name: 'ad_market',
-          label: '升级提示APP',
-          path: 'ad_market/app/flavors'
-      },
-      'mi.android' => {
-          name: 'mi.android',
-          label: '觅恋APP',
-          path: 'mi.android2/flavors'
-      },
-      'glass' => {
-          name: 'glass',
-          label: '碎屏APP',
-          path: 'glass/code/trunk/flavors'
+  PROJECTS_ROOT = Rails::env == 'development' ? '/Users/saxer/Develope/Bitbucket' : '/var/www/super_projects'
+  PROJECTS = Rails::env == 'development' ?
+      {
+          'ad_market' => {
+              name: 'ad_market',
+              label: '升级提示APP',
+              path: 'ad_market/app/flavors'
+          },
+          'mi.android' => {
+              name: 'mi.android',
+              label: '觅恋APP',
+              path: 'mi.android2/flavors'
+          },
+          'glass' => {
+              name: 'glass',
+              label: '碎屏APP',
+              path: 'glass/code/trunk/flavors'
+          }
       }
-  }
+  :
+      {
+          'ad_market' => {
+              name: 'ad_market',
+              label: '升级提示APP',
+              path: 'ad_market/current/app/flavors'
+          }
+      }
 
   def index
     @projects = PROJECTS
