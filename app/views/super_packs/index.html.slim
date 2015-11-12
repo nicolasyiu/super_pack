@@ -23,7 +23,7 @@ header.mi-header
       .item.i-3-1#super-pack-item
         span.icon.glyphicon.glyphicon-phone
         p.title 超级打包
-      .item.i-3-1(data-href="#{directories_path}/?root_path=public/apks/#{@current_user.user_id}")
+      .item.i-3-1(data-href="#{directories_path}/?root_path=#{@current_user.apks_dir}")
         span.icon.glyphicon.glyphicon-download
         p.title 下载APK
     .row

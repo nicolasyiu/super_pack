@@ -18,7 +18,7 @@ set :deploy_to, '/var/www/super_pack'
 set :repository, 'git@github.com:mumaoxi/super_pack.git'
 set :branch, 'master'
 # set :branch, 'develop'
-set :keep_releases, 20
+set :keep_releases, 5
 set :rails_env, :production
 
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.

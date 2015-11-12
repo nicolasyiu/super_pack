@@ -14,4 +14,11 @@ class PUser < ActiveRecord::Base
         packager: '封包工程师',
     }[self.role.to_sym]
   end
+
+
+  def apks_dir
+    path = "public/apks/#{user_id}"
+    Dir.mkdir(path, 0700) unless Dir.exist?(path)
+    path
+  end
 end
