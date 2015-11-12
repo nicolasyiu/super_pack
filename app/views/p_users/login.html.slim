@@ -1,0 +1,12 @@
+=content_for :tab_title do
+  '登录 end
+
+= form_for :p_user, :html => {:class => 'wap-login', :role => 'form'}, url: login_path do |f|
+
+  img.img-circle.wap-login-logo(src=asset_path('logo.png') )
+  .wap-login-brand 超级打包
+  .text.text-danger#wap_login_span=flash[:login_msg]
+  input.form-control.wap-login-phone(type='email' name='user_name' placeholder='请输入爱火APK邮箱' value='')
+  input.form-control.wap-login-passwd(type='password' name='user_pwd' placeholder='输入登陆密码' value='')
+
+  button.btn.btn-primary.btn-block.wap-login-button(type="submit" onclick="$(this).button('loading');") 登&nbsp;录

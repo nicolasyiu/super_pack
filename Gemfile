@@ -1,8 +1,7 @@
 source 'https://ruby.taobao.org'
 
 
-gem 'rails', '4.2.4'
-gem 'sqlite3'
+gem 'rails', '4.2.0.rc3'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
@@ -13,6 +12,8 @@ gem 'slim-rails', '~> 3.0.1'
 gem 'core_extend', '~> 0.1.7' #ruby核心扩展模块
 gem 'jextend', '~> 0.1.2' #javascript扩展
 gem 'bootstrap-sass', '~> 3.3.5.1'
+
+gem 'mysql2', '~>0.3.16'
 
 group :development, :test do
   gem 'byebug'
