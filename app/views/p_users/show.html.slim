@@ -1,5 +1,6 @@
 content_for :tab_title do
-'我的资料 end
+'我的资料
+end
 
 header.mi-header
   h2 我的资料
@@ -32,7 +33,7 @@ header.mi-header
           span=@current_user.login_count
         li
           span.text-gray= h_html_empty('最后登录', 8)
-          span=@current_user.last_login_time
+          span=@current_user.last_login_time.strftime('%Y-%m-%d %H:%M:%S')
 
 
     div(align='center')

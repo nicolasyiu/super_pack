@@ -5,7 +5,6 @@ module ApplicationHelper
     user = PUser.where(user_id: session[:user_id]).take
     unless user
       session[:user_id]=nil
-      return redirect_to root_path
     end
     user
   end

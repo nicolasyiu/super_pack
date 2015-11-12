@@ -22,6 +22,7 @@
 //= require pages/directory_page
 //= require pages/directories_page
 //= require pages/super_packs_page
+//= require pages/user_detail_page
 //重写alert
 window.alert = function (msg) {
     $.miToast(msg);
@@ -37,7 +38,9 @@ $("[data-href]").unbind('click').click(function () {
 
 var page_url = window.location.pathname;
 var page;
-if (/directories\/\d/.test(page_url)) {
+if (/p_users\/\d/.test(page_url)) {
+    page = new UserDetailPage();
+} else if (/directories\/\d/.test(page_url)) {
     page = new DirectoryPage();
 } else if (/directories/.test(page_url)) {
     page = new DirectoriesPage();

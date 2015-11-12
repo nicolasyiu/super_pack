@@ -12,6 +12,7 @@ gem 'slim-rails', '~> 3.0.1'
 gem 'core_extend', '~> 0.1.7' #ruby核心扩展模块
 gem 'jextend', '~> 0.1.2' #javascript扩展
 gem 'bootstrap-sass', '~> 3.3.5.1'
+gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
 
 gem 'mysql2', '~>0.3.16'
 

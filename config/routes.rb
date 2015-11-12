@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   get '/login', to: 'p_users#login'
   post '/login', to: 'p_users#login'
+  get '/logout', to: 'p_users#logout'
 
   root 'super_packs#index'
 end

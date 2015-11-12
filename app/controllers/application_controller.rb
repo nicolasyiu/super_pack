@@ -8,7 +8,8 @@ class ApplicationController < ActionController::Base
 
   #允许匿名访问的action
   ANONYMOUS_ACTIONS = [
-      'p_users/login' #登录
+      'p_users/login', #登录
+      'p_users/logout' #退出登录
   ]
 
   private

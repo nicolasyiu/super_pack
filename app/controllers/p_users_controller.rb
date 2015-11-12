@@ -11,8 +11,17 @@ class PUsersController < ApplicationController
       return flash[:login_msg]='用户不存在' unless user
       return flash[:login_msg]='密码不对' unless input_pwd==user.user_pwd
 
-      session[:user_id] = user.id
-      redirect_to root_path
+      session[:user_id] = user.user_id
+      user.update_attributes({
+                                 login_count: user.login_count+1,
+                                 last_login_time: Time.now
+                             })
+      return redirect_to root_path
     end
+  end
+
+  def logout
+    session[:user_id] = nil
+    return redirect_to login_path
   end
 end
