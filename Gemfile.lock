@@ -87,6 +87,7 @@ GEM
       slop (~> 3.4)
     pry-rails (0.3.4)
       pry (>= 0.9.10)
+    puma (2.14.0)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -179,6 +180,7 @@ DEPENDENCIES
   mina
   mysql2 (~> 0.3.16)
   pry-rails
+  puma
   rails (= 4.2.0.rc3)
   rails-i18n (~> 4.0.0)
   sass-rails (~> 5.0)
