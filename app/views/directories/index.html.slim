@@ -52,8 +52,7 @@ header.mi-header
                 =item.size.to_size
             -else
               span.glyphicon.glyphicon-folder-open.icon-dir &nbsp;
-              a(href=directories_path+"?extra_path=#{params[:extra_path]}/#{item.name}#{@project[:name]? ("&project="+@project[:name]): ''}#{params[:root_path]? ("&root_path="+params[:root_path]): ''}")=item.name
-
+              a(href=directories_path+"?"+dir_link_params("#{params[:extra_path]}/#{item.name}"))=item.name
             span.glyphicon.glyphicon-option-horizontal.pull-right.file-actions-btn.icon-file-item-action(data-item_path="#{params[:extra_path]}/#{item.name}" data-item_name=item.name)
 
 footer.mi-footer

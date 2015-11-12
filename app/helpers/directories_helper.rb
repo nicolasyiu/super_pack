@@ -9,11 +9,16 @@ module DirectoriesHelper
       link << {name: name, path: tmp_array.join("/")}
       link
     }.inject([]) { |html_array, link|
-      _params = ["extra_path=#{link[:path]}"]
-      (_params << "project=#{params[:project]}") if params[:project].present?
-      (_params << "root_path=#{params[:root_path]}") if params[:root_path].present?
-      html_array << (link[:path]==path ? link[:name] : "<a href='/directories?#{_params.join('&')}'>#{link[:name]}</a>"); html_array
+      html_array << (link[:path]==path ? link[:name] : "<a href='/directories?#{dir_link_params(link[:path])}'>#{link[:name]}</a>"); html_array
     }.join('&nbsp;/&nbsp;').html_safe
+  end
+
+
+  def dir_link_params(extra_path)
+    _params = ["extra_path=#{extra_path}"]
+    (_params << "project=#{params[:project]}") if params[:project].present? && !params[:root_path].present?
+    (_params << "root_path=#{params[:root_path]}") if params[:root_path].present?
+    _params.join('&')
   end
 
   #文件图标样式
