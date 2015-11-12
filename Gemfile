@@ -16,9 +16,12 @@ gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
 
 gem 'mysql2', '~>0.3.16'
 
+gem 'therubyracer'
+
 group :development, :test do
   gem 'byebug'
   gem 'pry-rails'
+  gem 'mina'
 end
 
 group :development do
