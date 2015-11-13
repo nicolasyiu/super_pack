@@ -21,6 +21,11 @@ class SuperPack
     0
   end
 
+  #正在打包的人
+  def self.runner(project_name)
+    PUser.where(user_id: lock_json(project_name)['creator_id']).take
+  end
+
   #是否正在运行打包
   def self.running?(project_name)
     File.exist?(run_file_path(project_name))

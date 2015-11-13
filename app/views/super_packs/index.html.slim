@@ -61,9 +61,12 @@ header.mi-header
             span.glyphicon.glyphicon-plane &nbsp;
             =project[:label]
             - if SuperPack.locking?(project[:name])
-              span.text.text-danger （已锁定）
+              span.text.text-danger
+                '（
+                small.text.text-gray=SuperPack.runner(project[:name]).nick_name
+                '锁定）
             - if SuperPack.running?(project[:name])
-              span.text.text-success （打包中）
+              span.text.text-success （打包）
               small.text.text-gray
                 '&nbsp;用时
                 =SuperPack.run_sec(project[:name])
