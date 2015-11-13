@@ -43,13 +43,15 @@ namespace :pack_monitor do
 
     #移动包到指定的目录
     creator_path = "#{Rails.root}/public/apks/#{json['creator_id']}"
+    Dir.mkdir(creator_path, 0700) unless Dir.exist?(creator_path)
+
     # creator_flavor_path = "#{creator_path}/#{json['flavor']}"
     # creator_flavor_day_path = "#{creator_flavor_path}/#{Time.now.strftime('%Y%m%d')}"
 
     apks_url = "#{build_path}/build/outputs/apk/*release.apk"
     command_mv = "cp #{apks_url.gsub(' ', '\ ')} #{creator_path.gsub(' ', '\ ')}/"
 
-    Dir.mkdir(creator_path, 0700) unless Dir.exist?(creator_path)
+
     # Dir.mkdir(creator_flavor_path, 0700) unless Dir.exist?(creator_flavor_path)
     # Dir.mkdir(creator_flavor_day_path, 0700) unless Dir.exist?(creator_flavor_day_path)
 
