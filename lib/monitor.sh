@@ -1,3 +1,3 @@
 #!/bin/zsh
-cd /Users/saxer/Develope/GitHub/packaging
-bundle exec rake pack_monitor:start
+cd /var/www/super_projects/ad_market
+RAILS_ENV=production bundle exec rake pack_monitor:start
