@@ -13,7 +13,7 @@ class SuperPacksController < ApplicationController
     #FIXME:创建者id修改
     lock_content = {
         flavor: params[:flavor],
-        creator_id: 1
+        creator_id: current_user[:user_id]
     }
     code = File.open(lock_file_path, 'w+') do |file|
       file.write(lock_content.to_json)

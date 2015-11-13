@@ -64,4 +64,8 @@ header.mi-header
               span.text.text-danger （已锁定）
             - if SuperPack.running?(project[:name])
               span.text.text-success （打包中）
+              small.text.text-gray
+                '&nbsp;用时
+                =SuperPack.run_sec(project[:name])
+                '秒
             span.check

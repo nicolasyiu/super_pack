@@ -15,6 +15,12 @@ class SuperPack
     File.delete(lock_file_path(project_name))
   end
 
+  #打包所用时长
+  def self.run_sec(project_name)
+    return Time.now.to_i-File.ctime(run_file_path(project_name)).to_i if running?(project_name)
+    0
+  end
+
   #是否正在运行打包
   def self.running?(project_name)
     File.exist?(run_file_path(project_name))
