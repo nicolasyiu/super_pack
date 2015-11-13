@@ -31,12 +31,17 @@ namespace :pack_monitor do
     project = DirectoriesController::PROJECTS[project_name]
     flavor_path = "#{DirectoriesController::PROJECTS_ROOT}/#{project[:path]}"
     build_path = flavor_path.gsub('/flavors', '')
-    #TODO 打特定的包
+    gradle_properties_path = "#{build_path}/gradle.properties"
+    json = SuperPack.lock_json(project_name)
+
+    File.open(gradle_properties_path, 'w+') do |file|
+      file.write("package_name=#{json['flavor']}")
+    end
+
     puts `cd #{build_path} && gradle clean && gradle build`
     puts `ls #{build_path}`
 
     #移动包到指定的目录
-    json = SuperPack.lock_json(project_name)
     creator_path = "#{Rails.root}/public/apks/#{json['creator_id']}"
     # creator_flavor_path = "#{creator_path}/#{json['flavor']}"
     # creator_flavor_day_path = "#{creator_flavor_path}/#{Time.now.strftime('%Y%m%d')}"
