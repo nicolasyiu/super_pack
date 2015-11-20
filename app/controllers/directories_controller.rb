@@ -24,6 +24,11 @@ class DirectoriesController < ApplicationController
               name: 'ad_market',
               label: '升级提示APP',
               path: 'ad_market/current/app/flavors'
+          },
+          'sft_fresh' => {
+              name: 'sft_fresh',
+              label: '商城客户端APP',
+              path: 'sft_fresh/shared/code/trunk/flavors'
           }
       }
 
