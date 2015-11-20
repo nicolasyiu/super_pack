@@ -28,7 +28,7 @@ class DirectoriesController < ApplicationController
           'sft_fresh' => {
               name: 'sft_fresh',
               label: '商城客户端APP',
-              path: 'sft_fresh/shared/code/trunk/flavors'
+              path: 'sft_fresh/current/code/trunk/flavors'
           }
       }
 
