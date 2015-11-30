@@ -9,8 +9,22 @@ header.mi-header
     '&nbsp;返回
 
 =content_for :content do
-  '上传文件
-
+  table.table.table-hover.app-list
+    tr
+      th(width='55px') 信息
+      th
+      th 状态
+    - @repacks.each do |repack|
+      tr(data-href=repack_path(repack.id))
+        td
+          img.app-avatar(src=repack.ic_launcher_path)
+        td
+          =repack.info_json[:appName]
+          br
+          small.text-gray=repack.info_json[:package]
+          br
+          small.text-gray=repack.info_json[:versionName]
+        td
 
 
 
@@ -18,5 +32,5 @@ footer.mi-footer
   button.mi-btn.mi-btn-large.mi-border-btn-danger#upload-file-btn
     span.glyphicon.glyphicon-upload 上传文件
     input.upload-file-input#upload-file-input(type='file')
-  button.mi-btn.mi-btn-large.mi-border-btn-success#new-file-btn
+  button.mi-btn.mi-btn-large.mi-border-btn-success.disabled#new-file-btn
     span.glyphicon.glyphicon-plus 创建

@@ -1,13 +1,14 @@
 class RepacksController < ApplicationController
-  def index
 
+  def index
+    @repacks = Directory.children("#{Rails.public_path}/repack").sort! { |a, b| b.name <=> a.name }.inject([]) { |memo, dir|
+      memo<< Repack.new(`echo #{Rails.public_path.to_s.gsub(' ', '\ ')}/repack/#{dir.name}/*.apk`.gsub("\n", ''))
+    }
   end
 
   def show
-
-    file_path = `echo #{Rails.public_path.to_s.gsub(' ','\ ')}/repack/#{params[:id]}/*.apk`.gsub("\n",'')
+    file_path = `echo #{Rails.public_path.to_s.gsub(' ', '\ ')}/repack/#{params[:id]}/*.apk`.gsub("\n", '')
     @repack = Repack.new(file_path)
-
   end
 
   def create

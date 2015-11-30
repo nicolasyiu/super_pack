@@ -1,8 +1,21 @@
-'show
-ul
-  li=@repack.info_json[:appName]
-  li=@repack.info_json[:package]
-  li=@repack.info_json[:versionCode]
-  li=@repack.info_json[:versionName]
+=content_for :tab_title do
+  '原包详情
+end
 
-img(src="/repack/#{@repack.id}/decode/#{@repack.info_json[:icLauncher]}")
+header.mi-header
+  h2  原包详情
+  .left.back
+    span.glyphicon.glyphicon-menu-left
+    '&nbsp;返回
+
+=content_for :content do
+  .mi-list-block
+    ul
+      li
+        img.img-rounded(src=@repack.ic_launcher_path)
+        .lines
+          label=@repack.info_json[:appName]
+          p=@repack.info_json[:package]
+          span.text-gray=@repack.info_json[:versionName]
+        .right
+          button.mi-btn.mi-btn-small.mi-border-btn-danger 重新打包

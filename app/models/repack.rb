@@ -22,6 +22,14 @@ class Repack
 
   end
 
+  #图标的url地址
+  def ic_launcher_path
+    launcher_path = "/repack/#{self.id}/decode/#{self.info_json[:icLauncher]}"
+
+    return launcher_path.gsub("dpi/", "dpi-v4/") unless Dir.exist?("#{Rails.public_path}/#{launcher_path}")
+
+    launcher_path
+  end
 
   private
   def aapt_load_info
