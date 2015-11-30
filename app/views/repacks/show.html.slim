@@ -34,6 +34,9 @@ header.mi-header
           span.glyphicon.glyphicon-list-alt.icon-file
           '&nbsp;&nbsp;config.json
       li
+        span.text-gray=h_html_empty('图标地址', 4)
+        =@repack.info_json[:icLauncher]
+      li
         span.text-gray=h_html_empty('资源文件', 4)
         a(href="#{directories_path}?root_path=#{Rails.public_path}/repack/#{@repack.id}/decode&extra_path=/res" target="_blank")
           span.glyphicon.glyphicon-folder-open.icon-dir
