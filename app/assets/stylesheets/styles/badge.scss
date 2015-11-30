@@ -9,6 +9,9 @@
   &.danger{
     background: red;
   }
+  &.default{
+    background: gray;
+  }
   &.warning{
     background: $color-text-orange;
   }

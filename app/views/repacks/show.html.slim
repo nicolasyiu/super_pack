@@ -18,4 +18,25 @@ header.mi-header
           p=@repack.info_json[:package]
           span.text-gray=@repack.info_json[:versionName]
         .right
-          button.mi-btn.mi-btn-small.mi-border-btn-danger 重新打包
+          button.mi-btn.mi-btn-small.mi-border-btn-danger#repack-btn 重新打包
+      li
+        span.text-gray=h_html_empty('原包大小', 4)
+        small.text.text-gray
+          =@repack.size.to_size
+      li
+        span.text-gray=h_html_empty('当前状态', 4)
+        span.mi-badge.warning 打包中
+        span.mi-badge.default 未初始化
+        span.mi-badge.success 打包成功
+      li(data-href="#{directories_path}/1?root_path=#{Rails.public_path}/repack/#{@repack.id}&extra_path=/config.json")
+        span.text-gray=h_html_empty('配置文件', 4)
+        span.glyphicon.glyphicon-list-alt.icon-file
+        '&nbsp;&nbsp;config.json
+      li(data-href="#{directories_path}?root_path=#{Rails.public_path}/repack/#{@repack.id}/decode&extra_path=/res")
+        span.text-gray=h_html_empty('资源文件', 4)
+        span.glyphicon.glyphicon-folder-open.icon-dir
+        '&nbsp;&nbsp;res
+      li
+        span.text-gray=h_html_empty('输出目录', 4)
+        span.glyphicon.glyphicon-folder-open.icon-dir
+        '&nbsp;&nbsp;dist

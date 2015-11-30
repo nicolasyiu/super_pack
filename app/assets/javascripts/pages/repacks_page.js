@@ -9,10 +9,6 @@ var RepacksPage = (function () {
 
     RepacksPage.prototype = new AppPage();
 
-    RepacksPage.prototype.dir_root_path = ''; //文件路径
-    RepacksPage.prototype.dir_extra_path = ''; //文件路径
-    RepacksPage.prototype.project = ''; //当前选中的app目录
-
     /**
      * 页面元素初始化
      */

@@ -1,4 +1,6 @@
-=content_for :tab_title do  '文件详情' end
+=content_for :tab_title do
+  '文件详情'
+end
 
 header.mi-header
   h2 文件详情
@@ -12,7 +14,8 @@ header.mi-header
     =path_split_links params[:extra_path]
   .panel.panel-default
     .panel-heading
-      =link_to @project[:label], "/directories?project=#{@project[:name]}"
+      =link_to @project[:label], "/directories?project=#{@project[:name]}" if @project
+      =link_to '根目录', "/directories?root_path=#{params[:root_path]}" unless @project
       - if @suffix=='json'
         button.btn.btn-success.btn-xs.pull-right.disabled#save_modify 保存修改
     .panel-body

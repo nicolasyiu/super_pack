@@ -4,22 +4,50 @@ class Repack
 
   attr_accessor :info_json #应用详细信息
   attr_accessor :repack_json #打包信息
+  attr_accessor :size
 
   def initialize(file_path)
     self.file_path = file_path
+    @size = File.size(file_path)
 
     self.id = File.dirname(file_path).split("/").last
 
     #初始化应用基本信息
     self.info_json ||= {}
-    self.info_json[:meta]||={}
+    self.info_json[:META]||={}
     aapt_load_info
 
+    #生成打包配置信息
+    create_config_json
   end
 
   #生成打包配置文件
-  def create_repack_json
-
+  # {
+  #     "versionCode": 651,
+  #     "versionName": "2.4.6",
+  #     "APP_CHANNELS": {
+  #     "初爱": [
+  #     "QQ腾讯应用宝"
+  # ]
+  # },
+  #     "META": {
+  #     "aihuo_api_key": "2d4c5104",
+  #     "aihuo_secret_key": "8604846a2d75a61e9ff1922cbc87937e",
+  #     "UMENG_APPKEY": "55e6b29ee0f55a057e0032f8",
+  #     "PUSH_APPID": "oCD8YxLfGF7EMjdZdbI1t7",
+  #     "PUSH_APPKEY": "7ZplEieSk38YgD4q5Xskj9",
+  #     "PUSH_APPSECRET": "TcHCybyBmv8W3GdsZDiE07"
+  # },
+  #     "STRING": {
+  # },
+  #     "PERMISSION": {
+  # },
+  #     "SIGN": "bluestorm"
+  # }
+  def create_config_json
+    File.open("#{Rails.public_path}/repack/#{id}/config.json", 'wb') do |f|
+      f.write(JSON.pretty_generate(self.info_json))
+    end
   end
 
   #图标的url地址
@@ -66,7 +94,7 @@ class Repack
         else
           value=xml_tree[i+2].gsub("\n", '').split("=\"")[1].split("\"")[0]
         end
-        self.info_json[:meta][name.to_sym]=value
+        self.info_json[:META][name.to_sym]=value
       end
     end
 
