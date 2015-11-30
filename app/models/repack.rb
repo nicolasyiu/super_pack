@@ -1,11 +1,14 @@
 class Repack
   attr_accessor :file_path
+  attr_accessor :id
 
   attr_accessor :info_json #应用详细信息
   attr_accessor :repack_json #打包信息
 
   def initialize(file_path)
     self.file_path = file_path
+
+    self.id = File.dirname(file_path).split("/").last
 
     #初始化应用基本信息
     self.info_json ||= {}

@@ -1,1 +1,8 @@
 'show
+ul
+  li=@repack.info_json[:appName]
+  li=@repack.info_json[:package]
+  li=@repack.info_json[:versionCode]
+  li=@repack.info_json[:versionName]
+
+img(src="/repack/#{@repack.id}/decode/#{@repack.info_json[:icLauncher]}")

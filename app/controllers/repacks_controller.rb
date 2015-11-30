@@ -5,6 +5,9 @@ class RepacksController < ApplicationController
 
   def show
 
+    file_path = `echo #{Rails.public_path.to_s.gsub(' ','\ ')}/repack/#{params[:id]}/*.apk`.gsub("\n",'')
+    @repack = Repack.new(file_path)
+
   end
 
   def create
