@@ -28,14 +28,16 @@ header.mi-header
         span.mi-badge.warning 打包中
         span.mi-badge.default 未初始化
         span.mi-badge.success 打包成功
-      li(data-href="#{directories_path}/1?root_path=#{Rails.public_path}/repack/#{@repack.id}&extra_path=/config.json")
+      li
         span.text-gray=h_html_empty('配置文件', 4)
-        span.glyphicon.glyphicon-list-alt.icon-file
-        '&nbsp;&nbsp;config.json
-      li(data-href="#{directories_path}?root_path=#{Rails.public_path}/repack/#{@repack.id}/decode&extra_path=/res")
+        a(href="#{directories_path}/1?root_path=#{Rails.public_path}/repack/#{@repack.id}&extra_path=/config.json" target="_blank")
+          span.glyphicon.glyphicon-list-alt.icon-file
+          '&nbsp;&nbsp;config.json
+      li
         span.text-gray=h_html_empty('资源文件', 4)
-        span.glyphicon.glyphicon-folder-open.icon-dir
-        '&nbsp;&nbsp;res
+        a(href="#{directories_path}?root_path=#{Rails.public_path}/repack/#{@repack.id}/decode&extra_path=/res" target="_blank")
+          span.glyphicon.glyphicon-folder-open.icon-dir
+          '&nbsp;&nbsp;res
       li
         span.text-gray=h_html_empty('输出目录', 4)
         span.glyphicon.glyphicon-folder-open.icon-dir
