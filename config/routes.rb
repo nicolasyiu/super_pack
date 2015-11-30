@@ -14,6 +14,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :repacks do
+    collection do
+      post :upload
+    end
+  end
+
   resources :p_users, only: [:show]
 
   get '/login', to: 'p_users#login'

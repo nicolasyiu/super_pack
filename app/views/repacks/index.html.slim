@@ -1,0 +1,22 @@
+=content_for :tab_title do
+  '反编译打包
+end
+
+header.mi-header
+  h2  反编译打包
+  .left.back
+    span.glyphicon.glyphicon-menu-left
+    '&nbsp;返回
+
+=content_for :content do
+  '上传文件
+
+
+
+
+footer.mi-footer
+  button.mi-btn.mi-btn-large.mi-border-btn-danger#upload-file-btn
+    span.glyphicon.glyphicon-upload 上传文件
+    input.upload-file-input#upload-file-input(type='file')
+  button.mi-btn.mi-btn-large.mi-border-btn-success#new-file-btn
+    span.glyphicon.glyphicon-plus 创建
