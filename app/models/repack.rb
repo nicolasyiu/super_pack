@@ -6,7 +6,9 @@ class Repack
   attr_accessor :repack_json #打包信息
   attr_accessor :size
 
-  attr_accessor :apk_sign #原始apk的签名信息
+  attr_reader :apk_sign #原始apk的签名信息
+
+  attr_accessor :status #状态
 
   def initialize(file_path)
     self.file_path = file_path
@@ -31,21 +33,18 @@ class Repack
   def init_apk_decode
     decode_path = "#{File.dirname(file_path)}/decode"
     build_path = "#{File.dirname(file_path)}/build"
-    `apktool d -f #{file_path.gsub(' ', '\ ')} -o #{decode_path.gsub(' ', '\ ')}` unless Dir.exist?(decode_path)
-    `apktool d -f #{file_path.gsub(' ', '\ ')} -o #{build_path.gsub(' ', '\ ')}` unless Dir.exist?(build_path)
+    `apktool d -f #{file_path.gsub(' ', '\ ')} -o #{decode_path.gsub(' ', '\ ')}` unless Dir.exist?(decode_path) #原始包
+    `apktool d -f #{file_path.gsub(' ', '\ ')} -o #{build_path.gsub(' ', '\ ')}` unless Dir.exist?(build_path) #打包用的包
   end
 
+  #原始包的一个用签名
   def apk_sign
 
-    unless @apk_sign
-      @apk_sign = `echo #{File.dirname(file_path).gsub(' ', '\ ')}/decode/original/META-INF/*.RSA`.split("\n").inject('') do |str, rsa|
-        command ="keytool -printcert -file #{rsa.gsub(" ", '\ ')}"
-        p "command\t"+command
-        str+= `#{command}`
-      end
+    @apk_sign ||= `echo #{File.dirname(file_path).gsub(' ', '\ ')}/decode/original/META-INF/*.RSA`.split("\n").inject('') do |str, rsa|
+      command ="keytool -printcert -file #{rsa.gsub(" ", '\ ')}"
+      str<< `#{command}`
     end
 
-    @apk_sign
   end
 
   #生成打包配置文件
@@ -72,10 +71,28 @@ class Repack
   #     "SIGN": "bluestorm"
   # }
   def create_config_json
+    #配置文件
     config_path = "#{Rails.public_path}/repack/#{id}/config.json"
     File.open(config_path, 'wb') do |f|
       f.write(JSON.pretty_generate(self.info_json))
     end unless File.exist?(config_path)
+
+    #状态文件
+    status_path = "#{Rails.public_path}/repack/#{id}/.status"
+    File.open(status_path, 'wb') do |f|
+      f.write('none')
+    end unless File.exist?(status_path)
+  end
+
+
+  def status
+    @status ||= File.read("#{Rails.public_path}/repack/#{id}/.status")
+  end
+
+  def status=(st)
+    File.open("#{Rails.public_path}/repack/#{id}/.status", 'wb') do |f|
+      f.write(st)
+    end
   end
 
   #图标的url地址

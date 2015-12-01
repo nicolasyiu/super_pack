@@ -28,9 +28,7 @@ header.mi-header
           =@repack.size.to_size
       li
         span.text-gray=h_html_empty('当前状态', 4)
-        span.mi-badge.warning 打包中
-        span.mi-badge.default 未初始化
-        span.mi-badge.success 打包成功
+        =repack_status_html @repack.status
       li
         span.text-gray=h_html_empty('打包配置', 4)
         a(href="#{directories_path}/1?root_path=#{Rails.public_path}/repack/#{@repack.id}&extra_path=/config.json" target="_blank")
