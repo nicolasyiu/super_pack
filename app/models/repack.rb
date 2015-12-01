@@ -6,6 +6,8 @@ class Repack
   attr_accessor :repack_json #打包信息
   attr_accessor :size
 
+  attr_accessor :apk_sign #原始apk的签名信息
+
   def initialize(file_path)
     self.file_path = file_path
     @size = File.size(file_path)
@@ -31,6 +33,19 @@ class Repack
     build_path = "#{File.dirname(file_path)}/build"
     `apktool d -f #{file_path.gsub(' ', '\ ')} -o #{decode_path.gsub(' ', '\ ')}` unless Dir.exist?(decode_path)
     `apktool d -f #{file_path.gsub(' ', '\ ')} -o #{build_path.gsub(' ', '\ ')}` unless Dir.exist?(build_path)
+  end
+
+  def apk_sign
+
+    unless @apk_sign
+      @apk_sign = `echo #{File.dirname(file_path).gsub(' ', '\ ')}/decode/original/META-INF/*.RSA`.split("\n").inject('') do |str, rsa|
+        command ="keytool -printcert -file #{rsa.gsub(" ", '\ ')}"
+        p "command\t"+command
+        str+= `#{command}`
+      end
+    end
+
+    @apk_sign
   end
 
   #生成打包配置文件

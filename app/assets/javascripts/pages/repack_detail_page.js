@@ -4,6 +4,7 @@ var RepackDetailPage = (function () {
 
     var $repackBtn;                     //重新打包按钮
     var $reInitResBtn;                  //重新生成资源文件
+    var $deleteSelfBtn;                 //删除此包的按钮
 
     function RepackDetailPage() {
         _this = this;
@@ -17,6 +18,7 @@ var RepackDetailPage = (function () {
     RepackDetailPage.prototype.onCreate = function () {
         $repackBtn = $("#repack-btn");
         $reInitResBtn = $("#re-init-res");
+        $deleteSelfBtn = $("#delete-self");
     };
 
     /**
@@ -38,6 +40,13 @@ var RepackDetailPage = (function () {
             var $this = $(this);
             $.miConfirm({title: "Are you sure?", body: "重新生成资源文件将会覆盖之前的资源文件"}, function () {
                 _this.actionReinitApk($this.data('path'));
+            });
+        });
+
+        $deleteSelfBtn.unbind().click(function () {
+            var $this = $(this);
+            $.miConfirm({title: "Are you sure?", body: "这将删除这个apk对应的所有资源"}, function () {
+                _this.actionDeleteSelf($this.data('path'));
             });
         });
     };
@@ -65,6 +74,31 @@ var RepackDetailPage = (function () {
                 $.miLoading('hide');
                 $.miToast("删除成功", function () {
                     window.location.reload();
+                });
+
+            }, error: function (data) {
+                $.miLoading('hide');
+                console.log(data);
+                $.miToast("删除失败:{0}".format(data.responseJSON.error));
+            }
+
+        });
+    };
+    /**
+     * 删除自己
+     * @param path
+     */
+    RepackDetailPage.prototype.actionDeleteSelf = function (path) {
+        $.miLoading('show');
+        $.ajax({
+            url: "/directories/1?path={0}&utf8=√&authenticity_token={1}&force=√".format(path,
+                _this.getAuthenticityToken()
+            ),
+            method: 'delete',
+            success: function (data) {
+                $.miLoading('hide');
+                $.miToast("删除成功", function () {
+                    window.location = '/repacks';
                 });
 
             }, error: function (data) {

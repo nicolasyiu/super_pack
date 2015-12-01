@@ -7,6 +7,8 @@ header.mi-header
   .left.back
     span.glyphicon.glyphicon-menu-left
     '&nbsp;返回
+  .right#delete-self(data-path="#{Rails.public_path}/repack/#{@repack.id}")
+    small.order-detail-option-menu 删除此包
 
 =content_for :content do
   .mi-list-block
@@ -15,7 +17,8 @@ header.mi-header
         img.img-rounded(src=@repack.ic_launcher_path)
         .lines
           label=@repack.info_json[:appName]
-          p=@repack.info_json[:package]
+          p
+            small=@repack.info_json[:package]
           span.text-gray=@repack.info_json[:versionName]
         .right
           button.mi-btn.mi-btn-small.mi-border-btn-danger#repack-btn 开始打包
@@ -29,15 +32,12 @@ header.mi-header
         span.mi-badge.default 未初始化
         span.mi-badge.success 打包成功
       li
-        span.text-gray=h_html_empty('配置文件', 4)
+        span.text-gray=h_html_empty('打包配置', 4)
         a(href="#{directories_path}/1?root_path=#{Rails.public_path}/repack/#{@repack.id}&extra_path=/config.json" target="_blank")
           span.glyphicon.glyphicon-list-alt.icon-file
           '&nbsp;&nbsp;config.json
       li
-        span.text-gray=h_html_empty('图标地址', 4)
-        =@repack.info_json[:icLauncher]
-      li
-        span.text-gray=h_html_empty('资源文件', 4)
+        span.text-gray=h_html_empty('打包资源', 4)
         a(href="#{directories_path}?root_path=#{Rails.public_path}/repack/#{@repack.id}/build&extra_path=/res" target="_blank")
           span.glyphicon.glyphicon-folder-open.icon-dir
           '&nbsp;&nbsp;res
@@ -47,3 +47,20 @@ header.mi-header
         span.text-gray=h_html_empty('输出目录', 4)
         span.glyphicon.glyphicon-folder-open.icon-dir
         '&nbsp;&nbsp;dist
+  .mi-list-block
+    ul
+      li
+        span.text-gray=h_html_empty('图标地址', 4)
+        small=@repack.info_json[:icLauncher]
+      li
+        span.text-gray=h_html_empty('Manifest', 4)
+        a(href="#{directories_path}/1?root_path=#{Rails.public_path}/repack/#{@repack.id}/decode&extra_path=/AndroidManifest.xml" target="_blank")
+          span.glyphicon.glyphicon-list-alt.icon-file
+          '&nbsp;&nbsp;AndroidManifest.xml
+
+  .mi-list-block
+    ul
+      li
+        h5.text-orange=h_html_empty('原始签名', 4)
+      li
+        .well=@repack.apk_sign
