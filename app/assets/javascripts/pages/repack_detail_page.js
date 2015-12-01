@@ -3,6 +3,7 @@ var RepackDetailPage = (function () {
 
 
     var $repackBtn;                     //重新打包按钮
+    var $reInitResBtn;                  //重新生成资源文件
 
     function RepackDetailPage() {
         _this = this;
@@ -15,6 +16,7 @@ var RepackDetailPage = (function () {
      */
     RepackDetailPage.prototype.onCreate = function () {
         $repackBtn = $("#repack-btn");
+        $reInitResBtn = $("#re-init-res");
     };
 
     /**
@@ -28,8 +30,14 @@ var RepackDetailPage = (function () {
      */
     RepackDetailPage.prototype.onBindEvent = function () {
         $repackBtn.unbind().click(function () {
-            $.miConfirm("Are you sure?", function () {
+            $.miConfirm({title: "Are you sure?", body: "开始打包后将会锁定"}, function () {
                 $.miToast("start...");
+            });
+        });
+        $reInitResBtn.unbind().click(function () {
+            var $this = $(this);
+            $.miConfirm({title: "Are you sure?", body: "重新生成资源文件将会覆盖之前的资源文件"}, function () {
+                _this.actionReinitApk($this.data('path'));
             });
         });
     };
@@ -39,6 +47,33 @@ var RepackDetailPage = (function () {
      */
     RepackDetailPage.prototype.onResume = function () {
 
+    };
+
+
+    /**
+     * 重新初始化资源文件
+     * @param path
+     */
+    RepackDetailPage.prototype.actionReinitApk = function (path) {
+        $.miLoading('show');
+        $.ajax({
+            url: "/directories/1?path={0}&utf8=√&authenticity_token={1}&force=√".format(path,
+                _this.getAuthenticityToken()
+            ),
+            method: 'delete',
+            success: function (data) {
+                $.miLoading('hide');
+                $.miToast("删除成功", function () {
+                    window.location.reload();
+                });
+
+            }, error: function (data) {
+                $.miLoading('hide');
+                console.log(data);
+                $.miToast("删除失败:{0}".format(data.responseJSON.error));
+            }
+
+        });
     };
 
     /**

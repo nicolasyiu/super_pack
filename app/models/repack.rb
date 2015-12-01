@@ -12,6 +12,9 @@ class Repack
 
     self.id = File.dirname(file_path).split("/").last
 
+    #反编译
+    init_apk_decode
+
     #初始化应用基本信息
     self.info_json ||= {}
     self.info_json[:META]||={}
@@ -19,6 +22,15 @@ class Repack
 
     #生成打包配置信息
     create_config_json
+  end
+
+
+  #初始化apk反编译资源文件
+  def init_apk_decode
+    decode_path = "#{File.dirname(file_path)}/decode"
+    build_path = "#{File.dirname(file_path)}/build"
+    `apktool d -f #{file_path.gsub(' ', '\ ')} -o #{decode_path.gsub(' ', '\ ')}` unless Dir.exist?(decode_path)
+    `apktool d -f #{file_path.gsub(' ', '\ ')} -o #{build_path.gsub(' ', '\ ')}` unless Dir.exist?(build_path)
   end
 
   #生成打包配置文件
@@ -45,9 +57,10 @@ class Repack
   #     "SIGN": "bluestorm"
   # }
   def create_config_json
-    File.open("#{Rails.public_path}/repack/#{id}/config.json", 'wb') do |f|
+    config_path = "#{Rails.public_path}/repack/#{id}/config.json"
+    File.open(config_path, 'wb') do |f|
       f.write(JSON.pretty_generate(self.info_json))
-    end
+    end unless File.exist?(config_path)
   end
 
   #图标的url地址
@@ -61,6 +74,10 @@ class Repack
 
   private
   def aapt_load_info
+
+    if self.info_json[:package]
+      return self.info_json
+    end
 
     #appt basic
     for info in `aapt d badging #{file_path.gsub(' ', '\ ')}`.split("\n")

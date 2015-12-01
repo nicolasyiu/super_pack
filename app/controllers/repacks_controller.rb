@@ -29,11 +29,6 @@ class RepacksController < ApplicationController
       f.write(file.read)
     end
 
-    #反编译
-    decode_path = "#{upload_path}/decode".gsub(' ', '\ ')
-    file_path = "#{upload_path}/#{@filename}".gsub(' ', '\ ')
-    `apktool d -f #{file_path} -o #{decode_path}`
-
     #生成应用信息文件和应用打包配置文件
     @repack = Repack.new("#{upload_path}/#{@filename}")
 

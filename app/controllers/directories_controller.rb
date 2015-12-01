@@ -99,7 +99,8 @@ class DirectoriesController < ApplicationController
 
     begin
       num = File.delete(params[:path]) if is_file
-      code = Dir.delete(params[:path]) unless is_file
+      code = Dir.delete(params[:path]) if !is_file && !params[:force]
+      code = `rm -r '#{params[:path]}'`.to_i if !is_file && params[:force]
     rescue Exception => e
       error = e.message
     end
