@@ -21,7 +21,7 @@ header.mi-header
             small=@repack.info_json[:package]
           span.text-gray=@repack.info_json[:versionName]
         .right
-          button.mi-btn.mi-btn-small.mi-border-btn-danger#repack-btn 开始打包
+          button.mi-btn.mi-btn-small.mi-border-btn-danger#repack-btn(data-id=@repack.id) 开始打包
       li
         span.text-gray=h_html_empty('原包大小', 4)
         small.text.text-gray
@@ -43,8 +43,9 @@ header.mi-header
           button.mi-btn.mi-btn-small.mi-border-btn-success#re-init-res(data-path="#{Rails.public_path}/repack/#{@repack.id}/build") 重新配置
       li
         span.text-gray=h_html_empty('输出目录', 4)
-        span.glyphicon.glyphicon-folder-open.icon-dir
-        '&nbsp;&nbsp;dist
+        a(href="#{directories_path}?root_path=#{Rails.public_path}/repack/#{@repack.id}/build&extra_path=/dist" target="_blank")
+          span.glyphicon.glyphicon-folder-open.icon-dir
+          '&nbsp;&nbsp;dist
   .mi-list-block
     ul
       li
@@ -61,4 +62,4 @@ header.mi-header
       li
         h5.text-orange=h_html_empty('原始签名', 4)
       li
-        .well=@repack.apk_sign
+        pre.well=@repack.apk_sign

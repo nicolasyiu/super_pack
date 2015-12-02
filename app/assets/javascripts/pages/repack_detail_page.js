@@ -32,8 +32,9 @@ var RepackDetailPage = (function () {
      */
     RepackDetailPage.prototype.onBindEvent = function () {
         $repackBtn.unbind().click(function () {
+            var $this = $(this);
             $.miConfirm({title: "Are you sure?", body: "开始打包后将会锁定"}, function () {
-                $.miToast("start...");
+               _this.actionRepack($this.data('id'));
             });
         });
         $reInitResBtn.unbind().click(function () {
@@ -113,30 +114,30 @@ var RepackDetailPage = (function () {
     /**
      * 开始打包
      */
-    RepackDetailPage.prototype.actionRepack = function () {
-        //var data = new FormData();
-        //data.append("file", $newFileInput[0].files[0]);
-        //data.append("authenticity_token", _this.getAuthenticityToken());
-        //data.append("utf8", "√");
-        //
-        //$.miLoading("show");
-        //$.ajax({
-        //    url: '/repacks/upload',
-        //    type: 'POST',
-        //    processData: false,
-        //    contentType: false,
-        //    data: data,
-        //    success: function (data) {
-        //        $.miLoading("hide");
-        //        $.miToast("上传成功", function () {
-        //            window.location = '/repacks/' + data.id
-        //        });
-        //    },
-        //    error: function (data) {
-        //        $.miLoading("hide");
-        //        $.miToast("上传失败");
-        //    }
-        //});
+    RepackDetailPage.prototype.actionRepack = function (id) {
+        var data = new FormData();
+        data.append("id", id);
+        data.append("authenticity_token", _this.getAuthenticityToken());
+        data.append("utf8", "√");
+
+        $.miLoading("show");
+        $.ajax({
+            url: '/repacks',
+            type: 'POST',
+            processData: false,
+            contentType: false,
+            data: data,
+            success: function (data) {
+                $.miLoading("hide");
+                $.miToast("启动成功", function () {
+                    window.location.reload();
+                });
+            },
+            error: function (data) {
+                $.miLoading("hide");
+                $.miToast("启动失败");
+            }
+        });
     };
 
     return RepackDetailPage;

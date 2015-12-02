@@ -28,6 +28,10 @@ class Repack
     create_config_json
   end
 
+  def self.find(id)
+    file_path = Directory.children("#{Rails.public_path}/repack/#{id}").select{|dir|dir.name.to_s.end_with?(".apk")}[0].path
+    Repack.new(file_path)
+  end
 
   #初始化apk反编译资源文件
   def init_apk_decode

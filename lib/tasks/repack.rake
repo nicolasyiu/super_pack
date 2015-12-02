@@ -17,8 +17,13 @@ namespace :repack do
   #5.打包apk
   #6.起名重新输出文件信息
   desc "Start to repack a apk file"
-  task :start, [] => :environment do |t, args|
-
+  task :start, [:repack_id] => :environment do |t, args|
+    repack = Repack.find(args.repack_id)
+    repack.status = 'ing'
+    `rm -r '#{File.dirname(repack.file_path)}/build/dist'`
+    `apktool b #{File.dirname(repack.file_path).to_s.gsub(' ', '\ ')}/build`
+    30.times.each{|t| puts t;sleep(1)}
+    repack.status = 'success'
   end
 
 end
