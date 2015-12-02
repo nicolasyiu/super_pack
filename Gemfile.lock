@@ -48,7 +48,7 @@ GEM
     builder (3.2.2)
     byebug (8.1.0)
     coderay (1.1.0)
-    core_extend (0.1.7)
+    core_extend (0.1.9)
     debug_inspector (0.0.2)
     erubis (2.7.0)
     execjs (2.6.0)
@@ -173,7 +173,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass (~> 3.3.5.1)
   byebug
-  core_extend (~> 0.1.7)
+  core_extend (~> 0.1.9)
   jbuilder (~> 2.0)
   jextend (~> 0.1.2)
   jquery-rails

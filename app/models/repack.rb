@@ -3,7 +3,7 @@ class Repack
   attr_accessor :id
 
   attr_accessor :info_json #应用详细信息
-  attr_accessor :repack_json #打包信息
+  attr_reader :repack_json #打包配置信息
   attr_accessor :size
 
   attr_reader :apk_sign #原始apk的签名信息
@@ -86,6 +86,11 @@ class Repack
     File.open(status_path, 'wb') do |f|
       f.write('none')
     end unless File.exist?(status_path)
+  end
+
+  #读取打包配置文件
+  def repack_json
+    @repack_json ||= JSON.parse(File.read("#{Rails.public_path}/repack/#{id}/config.json")).symbolize_keys
   end
 
 

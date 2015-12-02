@@ -25,6 +25,15 @@ class Directory
     end
   end
 
+  #递归获取某目录下的所有文件
+  def self.recursive_files(dir_path)
+    files = []
+    Directory.children(dir_path).each { |d|
+      files << d if d.file?
+      files += Directory.recursive_files(d.path) unless d.file?
+    }
+    files
+  end
 
   def file?
     File.file?(path)

@@ -20,10 +20,24 @@ namespace :repack do
   task :start, [:repack_id] => :environment do |t, args|
     repack = Repack.find(args.repack_id)
     repack.status = 'ing'
-    `rm -r '#{File.dirname(repack.file_path)}/build/dist'`
-    `apktool b #{File.dirname(repack.file_path).to_s.gsub(' ', '\ ')}/build`
-    30.times.each{|t| puts t;sleep(1)}
-    repack.status = 'success'
+
+    #apktool.yml
+    apktool = ApkTool.new(nil,"#{File.dirname(repack.file_path)}/build")
+    apktool.repack(repack)
+
+    #package
+
+    #app_name
+
+    #meta
+
+    system "rm -r #{File.dirname(repack.file_path).to_s.gsub(' ', '\ ')}/build/dist"
+    ret = system "apktool b -f #{File.dirname(repack.file_path).to_s.gsub(' ', '\ ')}/build"
+    8.times.each { |t| puts t; sleep(1) }
+
+
+    repack.status = ret ? 'success' : 'error'
+
   end
 
 end
