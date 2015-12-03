@@ -37,6 +37,11 @@ class ApkTool
     end
 
     puts "relace pacakge str end"
+
+
+    #TODO:app_name
+
+    #TODO:meta
   end
 
   #保存yml配置文件

@@ -21,20 +21,22 @@ namespace :repack do
     repack = Repack.find(args.repack_id)
     repack.status = 'ing'
 
+    #拷贝文件
+    #build文件夹只进行配置，不在这里打包
+    #打包时用repack目录
+    system "rm -r #{File.dirname(repack.file_path).to_s.gsub(' ', '\ ')}/repack"
+    system "cp -r #{File.dirname(repack.file_path).to_s.gsub(' ', '\ ')}/build #{File.dirname(repack.file_path).to_s.gsub(' ', '\ ')}/repack"
+    system "rm -r #{File.dirname(repack.file_path).to_s.gsub(' ', '\ ')}/repack/dist"
+    system "mkdir #{File.dirname(repack.file_path).to_s.gsub(' ', '\ ')}/build/dist"
+
     #apktool.yml
-    apktool = ApkTool.new(nil,"#{File.dirname(repack.file_path)}/build")
+    apktool = ApkTool.new(nil,"#{File.dirname(repack.file_path)}/repack")
     apktool.repack(repack)
 
-    #package
-
-    #app_name
-
-    #meta
-
-    system "rm -r #{File.dirname(repack.file_path).to_s.gsub(' ', '\ ')}/build/dist"
-    ret = system "apktool b -f #{File.dirname(repack.file_path).to_s.gsub(' ', '\ ')}/build"
-    8.times.each { |t| puts t; sleep(1) }
-
+    #打包、拷贝apk文件到配置目录、删除打包目录
+    ret = system "apktool b -f #{File.dirname(repack.file_path).to_s.gsub(' ', '\ ')}/repack"
+    system "cp #{File.dirname(repack.file_path).to_s.gsub(' ', '\ ')}/repack/dist/*.apk #{File.dirname(repack.file_path).to_s.gsub(' ', '\ ')}/build/dist/"
+    system "rm -r #{File.dirname(repack.file_path).to_s.gsub(' ', '\ ')}/repack"
 
     repack.status = ret ? 'success' : 'error'
 
