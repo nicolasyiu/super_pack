@@ -33,10 +33,14 @@ namespace :repack do
     apktool = ApkTool.new(nil,"#{File.dirname(repack.file_path)}/repack")
     apktool.repack(repack)
 
+    sleep(1)
     #打包、拷贝apk文件到配置目录、删除打包目录
-    ret = system "apktool b -f #{File.dirname(repack.file_path).to_s.gsub(' ', '\ ')}/repack"
+    rebuild_command = "apktool b -f #{File.dirname(repack.file_path).to_s.gsub(' ', '\ ')}/repack"
+    puts `java -version`
+    puts rebuild_command
+    ret = system(rebuild_command)
     system "cp #{File.dirname(repack.file_path).to_s.gsub(' ', '\ ')}/repack/dist/*.apk #{File.dirname(repack.file_path).to_s.gsub(' ', '\ ')}/build/dist/"
-    system "rm -r #{File.dirname(repack.file_path).to_s.gsub(' ', '\ ')}/repack"
+    # system "rm -r #{File.dirname(repack.file_path).to_s.gsub(' ', '\ ')}/repack"
 
     repack.status = ret ? 'success' : 'error'
 

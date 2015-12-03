@@ -1,4 +1,6 @@
+require 'rexml/document'
 class Repack
+  include REXML
   attr_accessor :file_path
   attr_accessor :id
 
@@ -140,23 +142,10 @@ class Repack
     end
 
     #aapt metas
-    xml_tree = `aapt dump xmltree #{file_path.gsub(' ', '\ ')} AndroidManifest.xml`.split("\n")
-    xml_tree.each_with_index do |info, i|
-      if info.include?('E: meta-data')
-        name = xml_tree[i+1].gsub("\n", '').split("=\"")[1].split("\"")[0]
-        value = ''
-        if xml_tree[i+2].include?('type 0x')
-          value=xml_tree[i+2].gsub("\n", '').split('type 0x')[1].split(')')[1]
-        elsif xml_tree[i+2].include?('android:resource')
-          value=xml_tree[i+2].gsub("\n", '').split(')=')[1]
-        elsif xml_tree[i+2].include?('=@0x')
-          value="@"+xml_tree[i+2].gsub("\n", '').split("=@")[1]
-        else
-          value=xml_tree[i+2].gsub("\n", '').split("=\"")[1].split("\"")[0]
-        end
-        self.info_json[:META][name.to_sym]=value
-      end
-    end
+    doc = REXML::Document.new(File.read("#{File.dirname(file_path)}/decode/AndroidManifest.xml"))
+    doc.root.elements['application'].get_elements('meta-data').each { |meta|
+      self.info_json[:META][meta.attributes['android:name']]=meta.attributes['android:value']
+    }
 
     info_json
   end

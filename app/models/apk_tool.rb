@@ -1,4 +1,6 @@
+require 'rexml/document'
 class ApkTool
+  include REXML
   attr_accessor :build_path
   attr_reader :yml
 
@@ -27,8 +29,7 @@ class ApkTool
     new_package, new_split_package = repack.repack_json[:package], repack.repack_json[:package].gsub('.', '/')
 
 
-    puts "relace pacakge str start"
-
+    #package str
     Directory.recursive_files(build_path).each do |dir|
       if %w(smali xml java).include?(dir.name.split(".").last)
         self.replace(dir.path, old_package, new_package)
@@ -36,12 +37,32 @@ class ApkTool
       end
     end
 
-    puts "relace pacakge str end"
+    #AndroidManifest.xml
+    ###app_name
+    doc = REXML::Document.new(File.read("#{build_path}/AndroidManifest.xml"))
+    label_attribute = doc.root.elements['application'].attributes['android:label']
+    if label_attribute
+      if label_attribute.start_with?('@string')
+        string_doc = REXML::Document.new(File.read("#{build_path}/res/values/strings.xml"))
+        string_doc.root.elements["string[@name='#{label_attribute.gsub('@string/', '')}']"].text = repack.repack_json[:appName]
+        File.open("#{build_path}/res/values/strings.xml", 'wb') do |f|
+          string_doc.write(f, 2)
+        end
+      else
+        doc.root.elements['application'].attributes['android:label'] = repack.repack_json[:appName]
+      end
+    end
+    ###TODO:mainActivityName
 
+    ###meta
+    repack.repack_json[:META].each do |key, v|
+      doc.root.elements['application'].elements["meta-data[@android:name='#{key.to_s}']"].attributes['android:value'] =v.to_s
+      #FIXME:修复@string/UMENG_KEY这样的问题
+    end
 
-    #TODO:app_name
-
-    #TODO:meta
+    File.open("#{build_path}/AndroidManifest.xml", 'w') do |f|
+      doc.write(f, 2)
+    end
   end
 
   #保存yml配置文件
