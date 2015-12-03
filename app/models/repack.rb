@@ -29,7 +29,7 @@ class Repack
   end
 
   def self.find(id)
-    file_path = Directory.children("#{Rails.public_path}/repack/#{id}").select{|dir|dir.name.to_s.end_with?(".apk")}[0].path
+    file_path = Directory.children("#{Rails.public_path}/repack/#{id}").select { |dir| dir.name.to_s.end_with?(".apk") }[0].path
     Repack.new(file_path)
   end
 
@@ -149,6 +149,8 @@ class Repack
           value=xml_tree[i+2].gsub("\n", '').split('type 0x')[1].split(')')[1]
         elsif xml_tree[i+2].include?('android:resource')
           value=xml_tree[i+2].gsub("\n", '').split(')=')[1]
+        elsif xml_tree[i+2].include?('=@0x')
+          value="@"+xml_tree[i+2].gsub("\n", '').split("=@")[1]
         else
           value=xml_tree[i+2].gsub("\n", '').split("=\"")[1].split("\"")[0]
         end

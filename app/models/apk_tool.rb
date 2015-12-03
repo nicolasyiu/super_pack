@@ -21,14 +21,22 @@ class ApkTool
     yml['versionInfo']['versionCode'] = repack.repack_json[:versionCode]
     yml['packageInfo']['orig_package'] = repack.info_json[:package]
     yml['packageInfo']['cur_package'] = repack.repack_json[:package]
-    #TODO: package修改
     self.save_yml
 
+    old_package, old_split_package = repack.info_json[:package], repack.info_json[:package].gsub('.', '/')
+    new_package, new_split_package = repack.repack_json[:package], repack.repack_json[:package].gsub('.', '/')
+
+
+    puts "relace pacakge str start"
+
     Directory.recursive_files(build_path).each do |dir|
-      puts dir.name
-      #TODO:package修改
+      if %w(smali xml java).include?(dir.name.split(".").last)
+        self.replace(dir.path, old_package, new_package)
+        self.replace(dir.path, old_split_package, new_split_package)
+      end
     end
-    # File.walk(self.decoded_file_path):
+
+    puts "relace pacakge str end"
   end
 
   #保存yml配置文件
@@ -37,4 +45,18 @@ class ApkTool
       f.write(yml.to_yaml)
     end
   end
+
+  #替换文件内容
+  def replace(file_path, old_str, new_str)
+    content = File.read(file_path)
+    begin
+      content = content.gsub(old_str, new_str)
+    rescue
+    end
+
+    File.open(file_path, 'wb') do |f|
+      f.write(content)
+    end
+  end
+
 end
