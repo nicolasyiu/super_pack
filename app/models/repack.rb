@@ -24,6 +24,7 @@ class Repack
     #初始化应用基本信息
     self.info_json ||= {}
     self.info_json[:META]||={}
+    self.info_json[:STRING]||={}
     aapt_load_info
 
     #生成打包配置信息
