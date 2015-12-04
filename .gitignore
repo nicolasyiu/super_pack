@@ -18,6 +18,7 @@
 /.idea/
 /config/database.yml
 /public/assets/
+/public/keystores/*
 run.sh
 /public/upload/
 /public/apks/
