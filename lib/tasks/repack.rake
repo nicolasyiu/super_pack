@@ -24,6 +24,7 @@ namespace :repack do
     #拷贝文件
     #build文件夹只进行配置，不在这里打包
     #打包时用repack目录
+    system("source ~/.bash_profile")
     system "rm -r #{File.dirname(repack.file_path).to_s.gsub(' ', '\ ')}/repack"
     system "cp -r #{File.dirname(repack.file_path).to_s.gsub(' ', '\ ')}/build #{File.dirname(repack.file_path).to_s.gsub(' ', '\ ')}/repack"
     system "rm -r #{File.dirname(repack.file_path).to_s.gsub(' ', '\ ')}/repack/dist"
