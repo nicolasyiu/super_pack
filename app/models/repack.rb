@@ -1,5 +1,4 @@
 require 'rexml/document'
-require 'open-uri'
 class Repack
   include REXML
   attr_accessor :file_path
@@ -118,7 +117,6 @@ class Repack
     launcher_path
   end
 
-  private
   def aapt_load_info
 
     if self.info_json[:package]
@@ -129,9 +127,9 @@ class Repack
     aapt_command = "aapt d badging #{file_path.gsub(' ', '\ ')}"
     puts "aapt_command\t#{aapt_command}"
     puts `#{aapt_command}`
-    # `#{aapt_command}`.to_s.split("\n").each do |info|
-    IO.popen(aapt_command) { |f| f.readlines }.each do |line|
-      info = line.gsub("\n", '')
+    `#{aapt_command}`.to_s.split("\n").each do |info|
+      # IO.popen(aapt_command) { |f| f.readlines }.each do |line|
+      #   info = line.gsub("\n", '')
       if info.to_s.start_with?('package:')
         key_dict = info.gsub('pacakge:', '').gsub("'", '').split(' ').inject({}) { |memo, item|
           memo[item.split('=')[0].to_sym]=item.split('=')[1]; memo
