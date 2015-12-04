@@ -13,6 +13,7 @@ class Repack
   attr_accessor :status #状态
 
   def initialize(file_path)
+    puts file_path
     self.file_path = file_path
     @size = File.size(file_path)
 
