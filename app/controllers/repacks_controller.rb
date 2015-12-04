@@ -12,7 +12,7 @@ class RepacksController < ApplicationController
   end
 
   def create
-    system "bundle exec rake repack:start[#{params[:id]}] &"
+    system "bundle exec rake repack:start[#{params[:id]}] RAILS_ENV=#{Rails.env} &"
     render json: {msg: 'ok', id: params[:id]}
   end
 

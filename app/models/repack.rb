@@ -126,8 +126,6 @@ class Repack
     #appt basic
     aapt_command = "aapt d badging #{file_path.gsub(' ', '\ ')}"
     aapt_command = "/usr/lib/android-sdk-linux/build-tools/22.0.1/aapt d badging #{file_path.gsub(' ', '\ ')}" if Rails.env=='production'
-    puts "aapt_command\t#{aapt_command}"
-    puts `#{aapt_command}`
     `#{aapt_command}`.to_s.split("\n").each do |info|
       # IO.popen(aapt_command) { |f| f.readlines }.each do |line|
       #   info = line.gsub("\n", '')
