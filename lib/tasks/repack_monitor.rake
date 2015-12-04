@@ -4,13 +4,13 @@ namespace :repack_monitor do
   task :start, [] => :environment do |t, args|
     now = Time.now.to_i
     while Time.now.to_i-now <55 do
-      monitor
+      repack_monitor
       sleep(1)
     end
   end
   private
   #开始监控
-  def monitor
+  def repack_monitor
     repack_dir = Directory.children("#{Rails.public_path}/repack").select { |item|
       File.read("#{item.path}/.status")=='none'
     }[0]
