@@ -1,4 +1,5 @@
 require 'rexml/document'
+require 'open-uri'
 class Repack
   include REXML
   attr_accessor :file_path
