@@ -12,7 +12,9 @@ class RepacksController < ApplicationController
   end
 
   def create
-    system "rvm use 2.1.5 && bundle exec rake repack:start[#{params[:id]}] RAILS_ENV=#{Rails.env} &"
+    # system "rvm use 2.1.5 && bundle exec rake repack:start[#{params[:id]}] RAILS_ENV=#{Rails.env} &"
+    repack = Repack.find(params[:id])
+    repack.status = 'none'
     render json: {msg: 'ok', id: params[:id]}
   end
 
