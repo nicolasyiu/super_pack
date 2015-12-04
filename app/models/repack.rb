@@ -125,7 +125,9 @@ class Repack
     end
 
     #appt basic
-    `aapt d badging #{file_path.gsub(' ', '\ ')}`.to_s.split("\n").each do |info|
+    aapt_command = "aapt d badging #{file_path.gsub(' ', '\ ')}"
+    puts "aapt_command\t#{aapt_command}"
+    `#{aapt_command}`.to_s.split("\n").each do |info|
       if info.to_s.start_with?('package:')
         key_dict = info.gsub('pacakge:', '').gsub("'", '').split(' ').inject({}) { |memo, item|
           memo[item.split('=')[0].to_sym]=item.split('=')[1]; memo
