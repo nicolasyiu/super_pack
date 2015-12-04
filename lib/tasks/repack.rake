@@ -31,7 +31,7 @@ namespace :repack do
     puts rebuild_command
     ret = system(rebuild_command)
     system "cp #{File.dirname(repack.file_path).to_s.gsub(' ', '\ ')}/repack/dist/*.apk #{File.dirname(repack.file_path).to_s.gsub(' ', '\ ')}/build/dist/"
-    system "rm -r #{File.dirname(repack.file_path).to_s.gsub(' ', '\ ')}/repack"
+    # system "rm -r #{File.dirname(repack.file_path).to_s.gsub(' ', '\ ')}/repack"
 
     repack.status = ret ? 'success' : 'error'
 
