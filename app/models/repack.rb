@@ -41,8 +41,10 @@ class Repack
   def init_apk_decode
     decode_path = "#{File.dirname(file_path)}/decode"
     build_path = "#{File.dirname(file_path)}/build"
-    system("/usr/local/apktool/tools/apktool d -f #{file_path.gsub(' ', '\ ')} -o #{decode_path.gsub(' ', '\ ')}") unless Dir.exist?(decode_path) #原始包
-    system("/usr/local/apktool/tools/apktool d -f #{file_path.gsub(' ', '\ ')} -o #{build_path.gsub(' ', '\ ')}") unless Dir.exist?(build_path) #打包用的包
+    system("/usr/local/apktool/tools/apktool d -f #{file_path.gsub(' ', '\ ')} -o #{decode_path.gsub(' ', '\ ')}")
+    # unless Dir.exist?(decode_path) #原始包
+    system("/usr/local/apktool/tools/apktool d -f #{file_path.gsub(' ', '\ ')} -o #{build_path.gsub(' ', '\ ')}")
+    # unless Dir.exist?(build_path) #打包用的包
   end
 
   #原始包的一个用签名
