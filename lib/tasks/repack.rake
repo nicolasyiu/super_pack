@@ -1,14 +1,5 @@
 namespace :repack do
 
-  #反编译一个apk到指定的目录
-  desc "decode a app into specified path"
-  task :decode, [:app_path] => :environment do |t, args|
-    decode_path = "#{File.dirname(args.app_path)}/decode".gsub(' ', '\ ')
-    decode_command = "apktool d -f #{args.app_path} -o #{decode_path}"
-    puts decode_command
-    system decode_command
-  end
-
   #重新打包编译一个文件
   #1.解压反编译apk
   #2.修改资源文件等信息
@@ -24,7 +15,6 @@ namespace :repack do
     #拷贝文件
     #build文件夹只进行配置，不在这里打包
     #打包时用repack目录
-    system("source ~/.bash_profile")
     system "rm -r #{File.dirname(repack.file_path).to_s.gsub(' ', '\ ')}/repack"
     system "cp -r #{File.dirname(repack.file_path).to_s.gsub(' ', '\ ')}/build #{File.dirname(repack.file_path).to_s.gsub(' ', '\ ')}/repack"
     system "rm -r #{File.dirname(repack.file_path).to_s.gsub(' ', '\ ')}/repack/dist"
@@ -36,7 +26,7 @@ namespace :repack do
 
     sleep(1)
     #打包、拷贝apk文件到配置目录、删除打包目录
-    rebuild_command = "apktool b -f #{File.dirname(repack.file_path).to_s.gsub(' ', '\ ')}/repack"
+    rebuild_command = "/usr/local/apktool/tools/apktool b -f #{File.dirname(repack.file_path).to_s.gsub(' ', '\ ')}/repack"
     puts `java -version`
     puts rebuild_command
     ret = system(rebuild_command)
