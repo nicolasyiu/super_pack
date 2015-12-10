@@ -17,6 +17,7 @@
 /tmp
 /.idea/
 /config/database.yml
+/config/puma.rb
 /public/assets/
 /config/keystores/*
 run.sh

@@ -29,6 +29,11 @@ class DirectoriesController < ApplicationController
               name: 'sft_fresh',
               label: '商城客户端APP',
               path: 'sft_fresh/current/code/trunk/flavors'
+          },
+          'mi_android' => {
+              name: 'mi_android',
+              label: '觅恋客户端APP',
+              path: 'mi_android/current/flavors'
           }
       }
 

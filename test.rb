@@ -29,4 +29,4 @@ class RN
 end
 
 rm = RN.new
-20.times.each { rm.random_name }
+100.times.each { rm.random_name }
