@@ -35,7 +35,7 @@ namespace :pack_monitor do
     json = SuperPack.lock_json(project_name)
 
     File.open(gradle_properties_path, 'w+') do |file|
-      file.write("package_name=#{json['flavor']}")
+      file.write("package_name=#{json['flavor']}\nandroid.useDeprecatedNdk=true")
     end
 
     puts `cd #{build_path} && gradle clean && gradle build`
